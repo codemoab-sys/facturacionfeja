@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS documents (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Seed: usuario demo (password: demo123)
-INSERT INTO users (usuario, password, nombre) VALUES ('demo', '$2y$10$MQix4EOPLFVld5TrnwXsLeHmQR/t509mWU9ODrzF1O1UpOaO78lTi', 'Usuario Demo');
+INSERT INTO users (usuario, password, nombre) VALUES ('demo', '$2y$10$wQ4y.Hvp6utV59Wk9L.4BenXx8UA33BLsqxqieifz4RVJI4GnejYi', 'Usuario Demo');
 
 -- Seed: API keys demo (vacío — configurar desde la interfaz)
 INSERT INTO user_configs (user_id, base_url, api_key, api_secret) VALUES (1, '', '', '');
