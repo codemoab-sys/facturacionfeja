@@ -82,12 +82,12 @@ $router->get('/api/productos-demo', function () { auth(); (new \App\Controllers\
 $router->get('/api/clientes-demo', function () { auth(); (new \App\Controllers\ClienteController())->listarDemo(); });
 
 // ── Pages (render HTML) ──
-$router->get('/', 'PanelController@index');
-$router->get('/nueva-factura', 'FacturaController@create');
-$router->get('/nueva-boleta', 'BoletaController@create');
-$router->get('/nueva-nc', 'NotaCreditoController@create');
-$router->get('/nueva-nd', 'NotaDebitoController@create');
-$router->get('/nueva-guia', 'GuiaRemisionController@create');
-$router->get('/configuracion', 'ConfiguracionController@index');
-$router->get('/documentos/{tipo}', 'DocumentoController@index');
-$router->get('/resumenes', 'ResumenController@index');
+$router->get('/', function () { auth(); (new \App\Controllers\PanelController())->index(); });
+$router->get('/nueva-factura', function () { auth(); (new \App\Controllers\FacturaController())->create(); });
+$router->get('/nueva-boleta', function () { auth(); (new \App\Controllers\BoletaController())->create(); });
+$router->get('/nueva-nc', function () { auth(); (new \App\Controllers\NotaCreditoController())->create(); });
+$router->get('/nueva-nd', function () { auth(); (new \App\Controllers\NotaDebitoController())->create(); });
+$router->get('/nueva-guia', function () { auth(); (new \App\Controllers\GuiaRemisionController())->create(); });
+$router->get('/configuracion', function () { auth(); (new \App\Controllers\ConfiguracionController())->index(); });
+$router->get('/documentos/{tipo}', function ($p) { auth(); (new \App\Controllers\DocumentoController())->index($p); });
+$router->get('/resumenes', function () { auth(); (new \App\Controllers\ResumenController())->index(); });
