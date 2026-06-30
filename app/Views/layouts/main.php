@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📄%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" type="image/x-icon" href="public/img/isotipo.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#2563eb" />
-  <title>Demo API SUNAT PRO</title>
+  <title>SUNAT</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -41,10 +41,7 @@
             <i data-lucide="menu" class="w-5 h-5"></i>
           </button>
           <div class="flex items-center gap-2">
-            <span class="w-7 h-7 rounded-lg flex items-center justify-center" style="background: rgb(37 99 235); color: white;">
-              <i data-lucide="file-digit" class="w-4 h-4"></i>
-            </span>
-            <span class="font-extrabold text-sm tracking-tight" style="color: rgb(15 23 42);">SUNAT Demo</span>
+            <img src="public/img/logo.png" alt="SUNAT" style="height: 1.25rem;" />
           </div>
           <div class="w-9"></div>
         </header>
