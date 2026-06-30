@@ -41,7 +41,7 @@
             <i data-lucide="menu" class="w-5 h-5"></i>
           </button>
           <div class="flex items-center gap-2">
-            <img src="public/img/logo.png" alt="SUNAT" style="height: 1.25rem;" />
+            <img src="public/img/logo.png" alt="SUNAT" style="height: 1.5rem;" />
           </div>
           <div class="w-9"></div>
         </header>
