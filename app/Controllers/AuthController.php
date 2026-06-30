@@ -49,8 +49,15 @@ class AuthController extends Controller
             ], 429);
         }
 
-        $user = new Usuario();
-        $found = $user->findOneBy('usuario', $usuario);
+        try {
+            $user = new Usuario();
+            $found = $user->findOneBy('usuario', $usuario);
+        } catch (\Exception $e) {
+            return $this->json([
+                'success' => false,
+                'message' => 'Error de conexión con la base de datos.',
+            ], 500);
+        }
 
         if ($found && password_verify($password, $found['password'])) {
             $this->clearAttempts($usuario);
@@ -60,15 +67,17 @@ class AuthController extends Controller
             Session::set('user_nombre', $found['nombre']);
             Session::set('user_usuario', $found['usuario']);
 
-            $configModel = new \App\Models\ConfiguracionUsuario();
-            $cfg = $configModel->findByUserId($found['id']);
-            if ($cfg) {
-                Session::set('api_config', [
-                    'base_url'   => $cfg['base_url'],
-                    'api_key'    => $cfg['api_key'],
-                    'api_secret' => $cfg['api_secret'],
-                ]);
-            }
+            try {
+                $configModel = new \App\Models\ConfiguracionUsuario();
+                $cfg = $configModel->findByUserId($found['id']);
+                if ($cfg) {
+                    Session::set('api_config', [
+                        'base_url'   => $cfg['base_url'],
+                        'api_key'    => $cfg['api_key'],
+                        'api_secret' => $cfg['api_secret'],
+                    ]);
+                }
+            } catch (\Exception $e) {}
 
             $this->log('LOGIN_OK', $usuario, 'Login exitoso desde ' . ($_SERVER['REMOTE_ADDR'] ?? '?'));
             $this->json(['success' => true, 'message' => 'Login exitoso']);
