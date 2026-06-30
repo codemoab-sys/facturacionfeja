@@ -38,34 +38,77 @@ var App = window.App || (window.App = {});
   }
 
   App.api = {
-    getEmpresa: function () { return request('GET', '/empresa'); },
-    listSucursales: function () { return request('GET', '/sucursales'); },
-    listSeries: function (params) { return request('GET', '/series' + (params || '')); },
-    listClientes: function (buscar) { return request('GET', '/clientes?buscar=' + encodeURIComponent(buscar || '')); },
+    // ── Empresa / sucursales / series ──
+    obtenerEmpresa: function () { return request('GET', '/empresa'); },
+    listarSucursales: function () { return request('GET', '/sucursales'); },
+    listarSeries: function (params) { return request('GET', '/series' + (params || '')); },
+    listarClientes: function (buscar) { return request('GET', '/clientes?buscar=' + encodeURIComponent(buscar || '')); },
     buscarDocumento: function (tipo, numero) { return request('GET', '/buscar-documento?tipo=' + tipo + '&numero=' + numero); },
+
+    // ── Facturas ──
     crearFactura: function (data) { return request('POST', '/facturas', data); },
     listarFacturas: function (query) { return request('GET', '/facturas' + (query || '')); },
     verFactura: function (id) { return request('GET', '/facturas/' + id); },
+
+    // ── Boletas ──
     crearBoleta: function (data) { return request('POST', '/boletas', data); },
     listarBoletas: function (query) { return request('GET', '/boletas' + (query || '')); },
     verBoleta: function (id) { return request('GET', '/boletas/' + id); },
+
+    // ── Notas de crédito ──
     crearNotaCredito: function (data) { return request('POST', '/notas-credito', data); },
     listarNotasCredito: function (query) { return request('GET', '/notas-credito' + (query || '')); },
+
+    // ── Notas de débito ──
     crearNotaDebito: function (data) { return request('POST', '/notas-debito', data); },
     listarNotasDebito: function (query) { return request('GET', '/notas-debito' + (query || '')); },
+
+    // ── Guías de remisión ──
     crearGuia: function (data) { return request('POST', '/guias-remision', data); },
     listarGuias: function (query) { return request('GET', '/guias-remision' + (query || '')); },
+
+    // ── Resúmenes ──
     crearResumen: function (data) { return request('POST', '/resumenes', data); },
     listarResumenes: function (query) { return request('GET', '/resumenes' + (query || '')); },
     estadoResumen: function (id) { return request('GET', '/resumenes/' + id + '/estado'); },
+
+    // ── Descargas ──
     descargarPdf: function (tipo, id, format) { return request('GET', '/' + tipo + '/' + id + '/pdf?format=' + (format || 'a4')); },
     descargarXml: function (tipo, id) { return request('GET', '/' + tipo + '/' + id + '/xml'); },
     descargarCdr: function (tipo, id) { return request('GET', '/' + tipo + '/' + id + '/cdr'); },
+
+    // ── Panel ──
     panelIndicadores: function () { return request('GET', '/panel/indicadores'); },
     panelDocumentosRecientes: function () { return request('GET', '/panel/documentos-recientes'); },
     panelVentasMensuales: function () { return request('GET', '/panel/ventas-mensuales'); },
     panelEstadoSunat: function () { return request('GET', '/panel/estado-sunat'); },
     panelPorMoneda: function () { return request('GET', '/panel/por-moneda'); },
+
+    // ── Configuración ──
+    guardarConfig: function (data) { return request('POST', '/config', data); },
+    obtenerConfig: function () { return request('GET', '/config'); },
+
+    // ── Auth ──
+    iniciarSesion: function (usuario, password) {
+      return fetch(BASE_PATH + '/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'usuario=' + encodeURIComponent(usuario) + '&password=' + encodeURIComponent(password),
+      }).then(function (r) { return r.json(); });
+    },
+    cerrarSesion: function () { window.location.href = (typeof BASE_PATH !== 'undefined' ? BASE_PATH : '') + '/logout'; },
+
+    probarConexion: function (data) { return request('POST', '/test-conexion', data); },
+
+    // ── Demo ──
+    listarProductosDemo: function () { return request('GET', '/productos-demo'); },
+    listarClientesDemo: function () { return request('GET', '/clientes-demo'); },
+
+    // ── Aliases para compatibilidad ──
+    getEmpresa: function () { return request('GET', '/empresa'); },
+    listSucursales: function () { return request('GET', '/sucursales'); },
+    listSeries: function (params) { return request('GET', '/series' + (params || '')); },
+    listClientes: function (buscar) { return request('GET', '/clientes?buscar=' + encodeURIComponent(buscar || '')); },
     configGuardar: function (data) { return request('POST', '/config', data); },
     configObtener: function () { return request('GET', '/config'); },
     login: function (usuario, password) {

@@ -4,9 +4,9 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Services\SunatApiService;
 
-class ClientController extends Controller
+class ClienteController extends Controller
 {
-    public function list($params = [])
+    public function listar($params = [])
     {
         $api = new SunatApiService();
         $request = \App\Core\App::getInstance()->getRequest();
@@ -25,7 +25,7 @@ class ClientController extends Controller
         $this->json($result);
     }
 
-    public function demoList($params = [])
+    public function listarDemo($params = [])
     {
         $clientes = [
             ['tipo_doc' => '6', 'num_doc' => '20555666777', 'razon_social' => 'ACME CORPORATION SAC', 'direccion' => 'AV. LARCO 1234 - MIRAFLORES', 'email' => 'facturas@acme.com'],

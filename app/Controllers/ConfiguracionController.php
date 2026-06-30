@@ -3,9 +3,9 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Core\Session;
-use App\Models\UserConfig;
+use App\Models\ConfiguracionUsuario;
 
-class ConfigController extends Controller
+class ConfiguracionController extends Controller
 {
     public function index($params = [])
     {
@@ -16,7 +16,7 @@ class ConfigController extends Controller
         ]);
     }
 
-    public function show($params = [])
+    public function mostrar($params = [])
     {
         $cfg = Session::get('api_config', []);
         $this->json([
@@ -29,7 +29,7 @@ class ConfigController extends Controller
         ]);
     }
 
-    public function update($params = [])
+    public function actualizar($params = [])
     {
         $request = \App\Core\App::getInstance()->getRequest();
         $baseUrl   = $request->input('base_url', API_DEFAULT_BASE_URL);
@@ -45,7 +45,7 @@ class ConfigController extends Controller
 
         $userId = Session::get('user_id');
         if ($userId) {
-            $cfgModel = new UserConfig();
+            $cfgModel = new ConfiguracionUsuario();
             $existing = $cfgModel->findByUserId($userId);
             if ($existing) {
                 $cfgModel->update($existing['id'], [
@@ -66,7 +66,7 @@ class ConfigController extends Controller
         $this->json(['success' => true, 'message' => 'Configuración guardada']);
     }
 
-    public function testConexion($params = [])
+    public function probarConexion($params = [])
     {
         $request = \App\Core\App::getInstance()->getRequest();
         $baseUrl   = $request->input('base_url', '');

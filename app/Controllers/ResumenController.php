@@ -4,14 +4,14 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Services\SunatApiService;
 
-class SummaryController extends Controller
+class ResumenController extends Controller
 {
     public function index($params = [])
     {
         $this->render('summaries/index', ['pageTitle' => 'Resúmenes Diarios']);
     }
 
-    public function store($params = [])
+    public function guardar($params = [])
     {
         $api = new SunatApiService();
         $request = \App\Core\App::getInstance()->getRequest();

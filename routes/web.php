@@ -19,75 +19,75 @@ function auth()
 }
 
 // ── Auth ──
-$router->get('/login', 'AuthController@showLogin');
-$router->post('/login', 'AuthController@login');
-$router->get('/logout', 'AuthController@logout');
+$router->get('/login', 'AuthController@mostrarLogin');
+$router->post('/login', 'AuthController@iniciarSesion');
+$router->get('/logout', 'AuthController@cerrarSesion');
 
 // ── API (proxied) ──
 $router->get('/api/config', function () {
     auth();
-    $ctrl = new \App\Controllers\ConfigController();
-    $ctrl->show();
+    $ctrl = new \App\Controllers\ConfiguracionController();
+    $ctrl->mostrar();
 });
 $router->post('/api/config', function () {
     auth();
-    $ctrl = new \App\Controllers\ConfigController();
-    $ctrl->update();
+    $ctrl = new \App\Controllers\ConfiguracionController();
+    $ctrl->actualizar();
 });
 
 $router->post('/api/test-conexion', function () {
     auth();
-    (new \App\Controllers\ConfigController())->testConexion();
+    (new \App\Controllers\ConfiguracionController())->probarConexion();
 });
-$router->get('/api/empresa', function () { auth(); (new \App\Controllers\DashboardController())->proxy('getEmpresa', []); });
-$router->get('/api/sucursales', function () { auth(); (new \App\Controllers\DashboardController())->proxy('listSucursales', []); });
-$router->get('/api/series', function () { auth(); (new \App\Controllers\DocumentController())->proxySeries(); });
-$router->get('/api/clientes', function () { auth(); (new \App\Controllers\ClientController())->list(); });
-$router->get('/api/buscar-documento', function () { auth(); (new \App\Controllers\ClientController())->buscarDocumento(); });
+$router->get('/api/empresa', function () { auth(); (new \App\Controllers\PanelController())->procesar('getEmpresa', []); });
+$router->get('/api/sucursales', function () { auth(); (new \App\Controllers\PanelController())->procesar('listSucursales', []); });
+$router->get('/api/series', function () { auth(); (new \App\Controllers\DocumentoController())->procesarSeries(); });
+$router->get('/api/clientes', function () { auth(); (new \App\Controllers\ClienteController())->listar(); });
+$router->get('/api/buscar-documento', function () { auth(); (new \App\Controllers\ClienteController())->buscarDocumento(); });
 
-$router->post('/api/facturas', function () { auth(); (new \App\Controllers\InvoiceController())->store(); });
-$router->get('/api/facturas', function () { auth(); (new \App\Controllers\InvoiceController())->index(); });
-$router->get('/api/facturas/{id}', function ($p) { auth(); (new \App\Controllers\InvoiceController())->show($p); });
+$router->post('/api/facturas', function () { auth(); (new \App\Controllers\FacturaController())->guardar(); });
+$router->get('/api/facturas', function () { auth(); (new \App\Controllers\FacturaController())->index(); });
+$router->get('/api/facturas/{id}', function ($p) { auth(); (new \App\Controllers\FacturaController())->mostrar($p); });
 
-$router->post('/api/boletas', function () { auth(); (new \App\Controllers\BoletaController())->store(); });
+$router->post('/api/boletas', function () { auth(); (new \App\Controllers\BoletaController())->guardar(); });
 $router->get('/api/boletas', function () { auth(); (new \App\Controllers\BoletaController())->index(); });
-$router->get('/api/boletas/{id}', function ($p) { auth(); (new \App\Controllers\BoletaController())->show($p); });
+$router->get('/api/boletas/{id}', function ($p) { auth(); (new \App\Controllers\BoletaController())->mostrar($p); });
 
-$router->post('/api/notas-credito', function () { auth(); (new \App\Controllers\CreditNoteController())->store(); });
-$router->get('/api/notas-credito', function () { auth(); (new \App\Controllers\CreditNoteController())->index(); });
+$router->post('/api/notas-credito', function () { auth(); (new \App\Controllers\NotaCreditoController())->guardar(); });
+$router->get('/api/notas-credito', function () { auth(); (new \App\Controllers\NotaCreditoController())->index(); });
 
-$router->post('/api/notas-debito', function () { auth(); (new \App\Controllers\DebitNoteController())->store(); });
-$router->get('/api/notas-debito', function () { auth(); (new \App\Controllers\DebitNoteController())->index(); });
+$router->post('/api/notas-debito', function () { auth(); (new \App\Controllers\NotaDebitoController())->guardar(); });
+$router->get('/api/notas-debito', function () { auth(); (new \App\Controllers\NotaDebitoController())->index(); });
 
-$router->post('/api/guias-remision', function () { auth(); (new \App\Controllers\DispatchGuideController())->store(); });
-$router->get('/api/guias-remision', function () { auth(); (new \App\Controllers\DispatchGuideController())->index(); });
+$router->post('/api/guias-remision', function () { auth(); (new \App\Controllers\GuiaRemisionController())->guardar(); });
+$router->get('/api/guias-remision', function () { auth(); (new \App\Controllers\GuiaRemisionController())->index(); });
 
-$router->post('/api/resumenes', function () { auth(); (new \App\Controllers\SummaryController())->store(); });
-$router->get('/api/resumenes', function () { auth(); (new \App\Controllers\SummaryController())->index(); });
-$router->get('/api/resumenes/{id}/estado', function ($p) { auth(); (new \App\Controllers\SummaryController())->estado($p); });
+$router->post('/api/resumenes', function () { auth(); (new \App\Controllers\ResumenController())->guardar(); });
+$router->get('/api/resumenes', function () { auth(); (new \App\Controllers\ResumenController())->indexApi(); });
+$router->get('/api/resumenes/{id}/estado', function ($p) { auth(); (new \App\Controllers\ResumenController())->estado($p); });
 
-$router->get('/api/{tipo}/{id}/pdf', function ($p) { auth(); (new \App\Controllers\DocumentController())->downloadPdf($p); });
-$router->get('/api/{tipo}/{id}/xml', function ($p) { auth(); (new \App\Controllers\DocumentController())->downloadXml($p); });
-$router->get('/api/{tipo}/{id}/cdr', function ($p) { auth(); (new \App\Controllers\DocumentController())->downloadCdr($p); });
+$router->get('/api/{tipo}/{id}/pdf', function ($p) { auth(); (new \App\Controllers\DocumentoController())->descargarPdf($p); });
+$router->get('/api/{tipo}/{id}/xml', function ($p) { auth(); (new \App\Controllers\DocumentoController())->descargarXml($p); });
+$router->get('/api/{tipo}/{id}/cdr', function ($p) { auth(); (new \App\Controllers\DocumentoController())->descargarCdr($p); });
 
 // ── Panel endpoints ──
-$router->get('/api/panel/indicadores', function () { auth(); (new \App\Controllers\DashboardController())->proxy('panelIndicadores', []); });
-$router->get('/api/panel/documentos-recientes', function () { auth(); (new \App\Controllers\DashboardController())->proxy('panelDocumentosRecientes', []); });
-$router->get('/api/panel/ventas-mensuales', function () { auth(); (new \App\Controllers\DashboardController())->proxy('panelVentasMensuales', []); });
-$router->get('/api/panel/estado-sunat', function () { auth(); (new \App\Controllers\DashboardController())->proxy('panelEstadoSunat', []); });
-$router->get('/api/panel/por-moneda', function () { auth(); (new \App\Controllers\DashboardController())->proxy('panelPorMoneda', []); });
+$router->get('/api/panel/indicadores', function () { auth(); (new \App\Controllers\PanelController())->procesar('panelIndicadores', []); });
+$router->get('/api/panel/documentos-recientes', function () { auth(); (new \App\Controllers\PanelController())->procesar('panelDocumentosRecientes', []); });
+$router->get('/api/panel/ventas-mensuales', function () { auth(); (new \App\Controllers\PanelController())->procesar('panelVentasMensuales', []); });
+$router->get('/api/panel/estado-sunat', function () { auth(); (new \App\Controllers\PanelController())->procesar('panelEstadoSunat', []); });
+$router->get('/api/panel/por-moneda', function () { auth(); (new \App\Controllers\PanelController())->procesar('panelPorMoneda', []); });
 
 // ── Demo data endpoints ──
-$router->get('/api/productos-demo', function () { auth(); (new \App\Controllers\ProductController())->list(); });
-$router->get('/api/clientes-demo', function () { auth(); (new \App\Controllers\ClientController())->demoList(); });
+$router->get('/api/productos-demo', function () { auth(); (new \App\Controllers\ProductoController())->listar(); });
+$router->get('/api/clientes-demo', function () { auth(); (new \App\Controllers\ClienteController())->listarDemo(); });
 
 // ── Pages (render HTML) ──
-$router->get('/', 'DashboardController@index');
-$router->get('/nueva-factura', 'InvoiceController@create');
+$router->get('/', 'PanelController@index');
+$router->get('/nueva-factura', 'FacturaController@create');
 $router->get('/nueva-boleta', 'BoletaController@create');
-$router->get('/nueva-nc', 'CreditNoteController@create');
-$router->get('/nueva-nd', 'DebitNoteController@create');
-$router->get('/nueva-guia', 'DispatchGuideController@create');
-$router->get('/configuracion', 'ConfigController@index');
-$router->get('/documentos/{tipo}', 'DocumentController@index');
-$router->get('/resumenes', 'SummaryController@index');
+$router->get('/nueva-nc', 'NotaCreditoController@create');
+$router->get('/nueva-nd', 'NotaDebitoController@create');
+$router->get('/nueva-guia', 'GuiaRemisionController@create');
+$router->get('/configuracion', 'ConfiguracionController@index');
+$router->get('/documentos/{tipo}', 'DocumentoController@index');
+$router->get('/resumenes', 'ResumenController@index');

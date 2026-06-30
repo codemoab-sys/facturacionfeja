@@ -11,7 +11,7 @@ class BoletaController extends Controller
         $this->render('boletas/create', ['pageTitle' => 'Nueva Boleta']);
     }
 
-    public function store($params = [])
+    public function guardar($params = [])
     {
         $api = new SunatApiService();
         $request = \App\Core\App::getInstance()->getRequest();
@@ -30,7 +30,7 @@ class BoletaController extends Controller
         $this->json($result);
     }
 
-    public function show($params)
+    public function mostrar($params)
     {
         $api = new SunatApiService();
         $result = $api->get('/boletas/' . ($params['id'] ?? ''));

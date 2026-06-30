@@ -4,7 +4,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Services\SunatApiService;
 
-class DocumentController extends Controller
+class DocumentoController extends Controller
 {
     private $tipoMap = [
         'facturas'        => 'facturas',
@@ -23,7 +23,7 @@ class DocumentController extends Controller
         ]);
     }
 
-    public function proxySeries($params = [])
+    public function procesarSeries($params = [])
     {
         $api = new SunatApiService();
         $request = \App\Core\App::getInstance()->getRequest();
@@ -32,7 +32,7 @@ class DocumentController extends Controller
         $this->json($result);
     }
 
-    public function downloadPdf($params)
+    public function descargarPdf($params)
     {
         $tipo = $params['tipo'] ?? '';
         $id   = $params['id'] ?? '';
@@ -40,14 +40,14 @@ class DocumentController extends Controller
         $this->download($tipo, $id, 'pdf', $format);
     }
 
-    public function downloadXml($params)
+    public function descargarXml($params)
     {
         $tipo = $params['tipo'] ?? '';
         $id   = $params['id'] ?? '';
         $this->download($tipo, $id, 'xml');
     }
 
-    public function downloadCdr($params)
+    public function descargarCdr($params)
     {
         $tipo = $params['tipo'] ?? '';
         $id   = $params['id'] ?? '';

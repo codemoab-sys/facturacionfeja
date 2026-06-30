@@ -4,18 +4,18 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Services\SunatApiService;
 
-class DispatchGuideController extends Controller
+class NotaDebitoController extends Controller
 {
     public function create($params = [])
     {
-        $this->render('dispatch-guides/create', ['pageTitle' => 'Nueva Guía de Remisión']);
+        $this->render('debit-notes/create', ['pageTitle' => 'Nueva Nota de Débito']);
     }
 
-    public function store($params = [])
+    public function guardar($params = [])
     {
         $api = new SunatApiService();
         $request = \App\Core\App::getInstance()->getRequest();
-        $result = $api->post('/guias-remision', $request->all());
+        $result = $api->post('/notas-debito', $request->all());
         $this->json($result);
     }
 
@@ -26,7 +26,7 @@ class DispatchGuideController extends Controller
         $query = '';
         if ($request->get('estado')) $query .= '?estado=' . urlencode($request->get('estado'));
         if ($request->get('buscar')) $query .= (strpos($query, '?') === false ? '?' : '&') . 'buscar=' . urlencode($request->get('buscar'));
-        $result = $api->get('/guias-remision' . $query);
+        $result = $api->get('/notas-debito' . $query);
         $this->json($result);
     }
 }

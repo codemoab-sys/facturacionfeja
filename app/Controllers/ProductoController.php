@@ -3,9 +3,9 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 
-class ProductController extends Controller
+class ProductoController extends Controller
 {
-    public function list($params = [])
+    public function listar($params = [])
     {
         $productos = [
             ['codigo' => 'P001', 'cod_producto_sunat' => '43211503', 'descripcion' => 'LAPTOP HP PAVILION 15 i7 16GB 512GB SSD', 'unidad' => 'NIU', 'precio_unitario' => 2950.00, 'tip_afe_igv' => '10', 'categoria' => 'Tecnología'],

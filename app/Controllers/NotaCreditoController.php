@@ -4,18 +4,18 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Services\SunatApiService;
 
-class DebitNoteController extends Controller
+class NotaCreditoController extends Controller
 {
     public function create($params = [])
     {
-        $this->render('debit-notes/create', ['pageTitle' => 'Nueva Nota de Débito']);
+        $this->render('credit-notes/create', ['pageTitle' => 'Nueva Nota de Crédito']);
     }
 
-    public function store($params = [])
+    public function guardar($params = [])
     {
         $api = new SunatApiService();
         $request = \App\Core\App::getInstance()->getRequest();
-        $result = $api->post('/notas-debito', $request->all());
+        $result = $api->post('/notas-credito', $request->all());
         $this->json($result);
     }
 
@@ -26,7 +26,7 @@ class DebitNoteController extends Controller
         $query = '';
         if ($request->get('estado')) $query .= '?estado=' . urlencode($request->get('estado'));
         if ($request->get('buscar')) $query .= (strpos($query, '?') === false ? '?' : '&') . 'buscar=' . urlencode($request->get('buscar'));
-        $result = $api->get('/notas-debito' . $query);
+        $result = $api->get('/notas-credito' . $query);
         $this->json($result);
     }
 }

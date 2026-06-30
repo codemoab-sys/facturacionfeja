@@ -4,18 +4,19 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Services\SunatApiService;
 
-class CreditNoteController extends Controller
+class FacturaController extends Controller
 {
     public function create($params = [])
     {
-        $this->render('credit-notes/create', ['pageTitle' => 'Nueva Nota de Crédito']);
+        $this->render('invoices/create', ['pageTitle' => 'Nueva Factura']);
     }
 
-    public function store($params = [])
+    public function guardar($params = [])
     {
         $api = new SunatApiService();
         $request = \App\Core\App::getInstance()->getRequest();
-        $result = $api->post('/notas-credito', $request->all());
+        $data = $request->all();
+        $result = $api->post('/facturas', $data);
         $this->json($result);
     }
 
@@ -24,9 +25,16 @@ class CreditNoteController extends Controller
         $api = new SunatApiService();
         $request = \App\Core\App::getInstance()->getRequest();
         $query = '';
-        if ($request->get('estado')) $query .= '?estado=' . urlencode($request->get('estado'));
+        if ($request->get('estado')) $query .= (strpos($query, '?') === false ? '?' : '&') . 'estado=' . urlencode($request->get('estado'));
         if ($request->get('buscar')) $query .= (strpos($query, '?') === false ? '?' : '&') . 'buscar=' . urlencode($request->get('buscar'));
-        $result = $api->get('/notas-credito' . $query);
+        $result = $api->get('/facturas' . $query);
+        $this->json($result);
+    }
+
+    public function mostrar($params)
+    {
+        $api = new SunatApiService();
+        $result = $api->get('/facturas/' . ($params['id'] ?? ''));
         $this->json($result);
     }
 }

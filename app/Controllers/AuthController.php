@@ -3,7 +3,7 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Core\Session;
-use App\Models\User;
+use App\Models\Usuario;
 
 class AuthController extends Controller
 {
@@ -11,7 +11,7 @@ class AuthController extends Controller
     private const LOCKOUT_MINUTES = 15;
     private const BCRYPT_COST = 12;
 
-    public function showLogin($params = [])
+    public function mostrarLogin($params = [])
     {
         if (Session::has('user_id')) {
             $this->redirect('/');
@@ -19,7 +19,7 @@ class AuthController extends Controller
         $this->view('layouts/login');
     }
 
-    public function login($params = [])
+    public function iniciarSesion($params = [])
     {
         $request = \App\Core\App::getInstance()->getRequest();
         $usuario = trim($request->post('usuario', ''));
@@ -49,7 +49,7 @@ class AuthController extends Controller
             ], 429);
         }
 
-        $user = new User();
+        $user = new Usuario();
         $found = $user->findOneBy('usuario', $usuario);
 
         if ($found && password_verify($password, $found['password'])) {
@@ -60,7 +60,7 @@ class AuthController extends Controller
             Session::set('user_nombre', $found['nombre']);
             Session::set('user_usuario', $found['usuario']);
 
-            $configModel = new \App\Models\UserConfig();
+            $configModel = new \App\Models\ConfiguracionUsuario();
             $cfg = $configModel->findByUserId($found['id']);
             if ($cfg) {
                 Session::set('api_config', [
@@ -82,7 +82,7 @@ class AuthController extends Controller
         }
     }
 
-    public function logout($params = [])
+    public function cerrarSesion($params = [])
     {
         $userId = Session::get('user_id');
         $this->log('LOGOUT', 'user#' . $userId, 'Cierre de sesión');

@@ -12,7 +12,7 @@ App.Settings = class Settings {
 
   async _load() {
     try {
-      var res = await App.api.configObtener();
+      var res = await App.api.obtenerConfig();
       if (res.success && res.data) {
         this.container.querySelector('#cfg-url').value = res.data.base_url || '';
         this.container.querySelector('#cfg-key').value = res.data.api_key || '';
@@ -47,7 +47,7 @@ App.Settings = class Settings {
     btn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 icon-spin"></i> Guardando...';
     App.refreshIcons();
     try {
-      var res = await App.api.configGuardar(data);
+      var res = await App.api.guardarConfig(data);
       if (res.success) {
         btn.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i> Guardado';
         setTimeout(function () {
@@ -81,7 +81,7 @@ App.Settings = class Settings {
         api_key: this.container.querySelector('#cfg-key').value.trim(),
         api_secret: this.container.querySelector('#cfg-secret').value.trim(),
       };
-      var res = await App.api.testConexion(data);
+      var res = await App.api.probarConexion(data);
       resultDiv.style.display = 'block';
       if (res.success) {
         resultDiv.innerHTML = '<div style="padding: 1rem; background: rgb(220 252 231); border-radius: 0.75rem; color: rgb(22 101 52); display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="check-circle-2" class="w-5 h-5"></i> Conexi\u00f3n exitosa</div>';

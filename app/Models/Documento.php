@@ -3,7 +3,7 @@ namespace App\Models;
 
 use App\Core\Model;
 
-class Document extends Model
+class Documento extends Model
 {
     protected $table = 'documents';
 }

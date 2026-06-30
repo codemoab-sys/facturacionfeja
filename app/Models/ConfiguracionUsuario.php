@@ -3,7 +3,7 @@ namespace App\Models;
 
 use App\Core\Model;
 
-class UserConfig extends Model
+class ConfiguracionUsuario extends Model
 {
     protected $table = 'user_configs';
 

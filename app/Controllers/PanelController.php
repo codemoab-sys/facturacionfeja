@@ -4,14 +4,14 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Services\SunatApiService;
 
-class DashboardController extends Controller
+class PanelController extends Controller
 {
     public function index($params = [])
     {
         $this->render('dashboard', ['pageTitle' => 'Inicio']);
     }
 
-    public function proxy($method, $ignored)
+    public function procesar($method, $ignored)
     {
         $api = new SunatApiService();
         $request = \App\Core\App::getInstance()->getRequest();
