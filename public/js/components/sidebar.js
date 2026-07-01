@@ -45,7 +45,7 @@ var App = window.App || (window.App = {});
       return ''
         + '<div class="px-5 py-5 flex items-center justify-between">'
           + '<div>'
-            + '<img src="public/img/logo.png" alt="SUNAT" style="height: 2rem;" />'
+            + '<img src="public/img/logogeneral.png" alt="SUNAT" style="height: 2rem;" />'
           + '</div>'
           + '<button id="sidebar-close" class="lg:hidden p-1" style="color: rgb(148 163 184);">'
             + '<i data-lucide="x" class="w-5 h-5"></i>'
