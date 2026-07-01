@@ -27,7 +27,7 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <base href="<?= BASE_PATH ?>/" />
   <script>var BASE_PATH = '<?= BASE_PATH ?>';</script>
-  <link rel="stylesheet" href="public/css/styles.css" />
+  <link rel="stylesheet" href="<?= asset('css/styles.css') ?>" />
 </head>
 <body>
   <div id="root">
@@ -75,24 +75,24 @@ if (!$hasApiConfig):
   </div>
 
   <script id="app-session-data" type="application/json">{"nombre":"<?php echo htmlspecialchars($sessionUser ?? 'Usuario'); ?>","usuario":"<?php echo htmlspecialchars($sessionLogin ?? ''); ?>"}</script>
-  <script src="public/js/api.js"></script>
-  <script src="public/js/utils.js"></script>
-  <script src="public/js/components/sidebar.js"></script>
-  <script src="public/js/components/clientSelector.js"></script>
-  <script src="public/js/components/itemsTable.js"></script>
-  <script src="public/js/components/productPicker.js"></script>
-  <script src="public/js/components/clientPicker.js"></script>
-  <script src="public/js/components/responseModal.js"></script>
-  <script src="public/js/pages/login.js"></script>
-  <script src="public/js/pages/settings.js"></script>
-  <script src="public/js/pages/dashboard.js"></script>
-  <script src="public/js/pages/newInvoice.js"></script>
-  <script src="public/js/pages/newBoleta.js"></script>
-  <script src="public/js/pages/newCreditNote.js"></script>
-  <script src="public/js/pages/newDebitNote.js"></script>
-  <script src="public/js/pages/newDispatchGuide.js"></script>
-  <script src="public/js/pages/documentList.js"></script>
-  <script src="public/js/pages/summaries.js"></script>
-  <script src="public/js/pages/app.js"></script>
+  <script src="<?= asset('js/api.js') ?>"></script>
+  <script src="<?= asset('js/utils.js') ?>"></script>
+  <script src="<?= asset('js/components/sidebar.js') ?>"></script>
+  <script src="<?= asset('js/components/clientSelector.js') ?>"></script>
+  <script src="<?= asset('js/components/itemsTable.js') ?>"></script>
+  <script src="<?= asset('js/components/productPicker.js') ?>"></script>
+  <script src="<?= asset('js/components/clientPicker.js') ?>"></script>
+  <script src="<?= asset('js/components/responseModal.js') ?>"></script>
+  <script src="<?= asset('js/pages/login.js') ?>"></script>
+  <script src="<?= asset('js/pages/settings.js') ?>"></script>
+  <script src="<?= asset('js/pages/dashboard.js') ?>"></script>
+  <script src="<?= asset('js/pages/newInvoice.js') ?>"></script>
+  <script src="<?= asset('js/pages/newBoleta.js') ?>"></script>
+  <script src="<?= asset('js/pages/newCreditNote.js') ?>"></script>
+  <script src="<?= asset('js/pages/newDebitNote.js') ?>"></script>
+  <script src="<?= asset('js/pages/newDispatchGuide.js') ?>"></script>
+  <script src="<?= asset('js/pages/documentList.js') ?>"></script>
+  <script src="<?= asset('js/pages/summaries.js') ?>"></script>
+  <script src="<?= asset('js/pages/app.js') ?>"></script>
 </body>
 </html>

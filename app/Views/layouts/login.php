@@ -25,13 +25,13 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <base href="<?= BASE_PATH ?>/" />
   <script>var BASE_PATH = '<?= BASE_PATH ?>';</script>
-  <link rel="stylesheet" href="public/css/styles.css" />
+  <link rel="stylesheet" href="<?= asset('css/styles.css') ?>" />
 </head>
 <body>
   <div id="root"></div>
-  <script src="public/js/api.js"></script>
-  <script src="public/js/utils.js"></script>
-  <script src="public/js/pages/login.js"></script>
+  <script src="<?= asset('js/api.js') ?>"></script>
+  <script src="<?= asset('js/utils.js') ?>"></script>
+  <script src="<?= asset('js/pages/login.js') ?>"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       new App.Login().render(document.getElementById('root'));
