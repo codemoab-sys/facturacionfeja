@@ -24,6 +24,7 @@
   </script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <base href="<?= BASE_PATH ?>/" />
   <script>var BASE_PATH = '<?= BASE_PATH ?>';</script>
   <link rel="stylesheet" href="public/css/styles.css" />

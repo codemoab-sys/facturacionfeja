@@ -51,21 +51,17 @@ App.Settings = class Settings {
     App.refreshIcons();
     try {
       var res = await App.api.guardarConfig(data);
-      if (res.success) {
-        btn.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i> Guardado';
-        setTimeout(function () {
-          btn.innerHTML = '<i data-lucide="save" class="w-4 h-4"></i> Guardar configuraci\u00f3n';
-          btn.disabled = false;
-        }, 1500);
-      } else {
-        alert(res.message || 'Error al guardar');
-        btn.disabled = false;
-        btn.innerHTML = '<i data-lucide="save" class="w-4 h-4"></i> Guardar configuraci\u00f3n';
-      }
-    } catch (e) {
-      alert('Error: ' + e.message);
       btn.disabled = false;
       btn.innerHTML = '<i data-lucide="save" class="w-4 h-4"></i> Guardar configuraci\u00f3n';
+      if (res.success) {
+        Swal.fire({ icon: 'success', title: 'Guardado', text: 'Configuraci\u00f3n guardada correctamente', timer: 2000, showConfirmButton: false });
+      } else {
+        Swal.fire({ icon: 'error', title: 'Error', text: res.message || 'Error al guardar' });
+      }
+    } catch (e) {
+      btn.disabled = false;
+      btn.innerHTML = '<i data-lucide="save" class="w-4 h-4"></i> Guardar configuraci\u00f3n';
+      Swal.fire({ icon: 'error', title: 'Error', text: e.message });
     }
   }
 
