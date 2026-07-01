@@ -103,8 +103,8 @@ class ConfiguracionController extends Controller
         }
 
         $ext = strtolower(pathinfo($_FILES['certificado']['name'], PATHINFO_EXTENSION));
-        if (!in_array($ext, ['p12', 'pfx'])) {
-            return $this->json(['success' => false, 'message' => 'Formato no válido. Solo .p12 o .pfx.'], 400);
+        if (!in_array($ext, ['p12', 'pfx', 'pem'])) {
+            return $this->json(['success' => false, 'message' => 'Formato no válido. Solo .p12, .pfx o .pem.'], 400);
         }
 
         $userId = Session::get('user_id');

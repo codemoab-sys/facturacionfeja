@@ -46,12 +46,12 @@
         <i data-lucide="shield" class="w-5 h-5"></i> Certificado Digital
       </h2>
       <p style="font-size: 0.8rem; color: rgb(100 116 139); margin-bottom: 1rem;">
-        Sube tu certificado <strong>.p12</strong> o <strong>.pfx</strong> para firmar documentos electr&oacute;nicos.
+        Sube tu certificado <strong>.p12</strong>, <strong>.pfx</strong> o <strong>.pem</strong> para firmar documentos electr&oacute;nicos.
       </p>
       <div style="display: flex; flex-direction: column; gap: 1rem;">
         <div>
           <label class="label">Archivo de certificado</label>
-          <input id="cfg-cert-file" type="file" accept=".p12,.pfx" class="input" style="padding: 0.5rem;" />
+          <input id="cfg-cert-file" type="file" accept=".p12,.pfx,.pem" class="input" style="padding: 0.5rem;" />
         </div>
         <div>
           <label class="label">Contrase&ntilde;a del certificado</label>

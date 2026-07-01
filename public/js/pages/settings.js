@@ -106,7 +106,7 @@ App.Settings = class Settings {
 
     if (!fileInput.files || !fileInput.files[0]) {
       statusDiv.style.display = 'block';
-      statusDiv.innerHTML = '<div style="padding: 0.75rem; background: rgb(254 242 242); border-radius: 0.75rem; color: rgb(185 28 28); display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="x-circle" class="w-4 h-4"></i> Selecciona un archivo .p12 o .pfx</div>';
+      statusDiv.innerHTML = '<div style="padding: 0.75rem; background: rgb(254 242 242); border-radius: 0.75rem; color: rgb(185 28 28); display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="x-circle" class="w-4 h-4"></i> Selecciona un archivo .p12, .pfx o .pem</div>';
       App.refreshIcons();
       return;
     }
