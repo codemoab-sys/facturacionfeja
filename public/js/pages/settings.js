@@ -123,11 +123,15 @@ App.Settings = class Settings {
     try {
       var res = await App.api.subirCertificado(formData);
       statusDiv.style.display = 'block';
+      var debug = '';
+      if (res.debug_api) {
+        debug = '<pre style="margin-top:0.5rem;font-size:0.65rem;color:rgb(100 116 139);background:rgb(241 245 249);padding:0.5rem;border-radius:0.5rem;max-height:200px;overflow:auto;text-align:left;">HTTP ' + res.debug_api.http_code + '\n' + App.escapeHtml(res.debug_api.raw_body || '') + '</pre>';
+      }
       if (res.success) {
-        statusDiv.innerHTML = '<div style="padding: 0.75rem; background: rgb(220 252 231); border-radius: 0.75rem; color: rgb(22 101 52); display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="check-circle-2" class="w-4 h-4"></i> Certificado subido correctamente</div>';
+        statusDiv.innerHTML = '<div style="padding: 0.75rem; background: rgb(220 252 231); border-radius: 0.75rem; color: rgb(22 101 52);"><div style="display:flex;align-items:center;gap:0.5rem;"><i data-lucide="check-circle-2" class="w-4 h-4"></i> Certificado subido correctamente</div>' + debug + '</div>';
         this.container.querySelector('#cfg-delete-cert').style.display = 'inline-flex';
       } else {
-        statusDiv.innerHTML = '<div style="padding: 0.75rem; background: rgb(254 242 242); border-radius: 0.75rem; color: rgb(185 28 28); display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="x-circle" class="w-4 h-4"></i> ' + App.escapeHtml(res.message || 'Error al subir certificado') + '</div>';
+        statusDiv.innerHTML = '<div style="padding: 0.75rem; background: rgb(254 242 242); border-radius: 0.75rem; color: rgb(185 28 28);"><div style="display:flex;align-items:center;gap:0.5rem;"><i data-lucide="x-circle" class="w-4 h-4"></i> ' + App.escapeHtml(res.message || 'Error al subir certificado') + '</div>' + debug + '</div>';
       }
     } catch (e) {
       statusDiv.style.display = 'block';
