@@ -39,6 +39,18 @@ $router->post('/api/test-conexion', function () {
     auth();
     (new \App\Controllers\ConfiguracionController())->probarConexion();
 });
+$router->post('/api/certificado', function () {
+    auth();
+    (new \App\Controllers\ConfiguracionController())->subirCertificado();
+});
+$router->delete('/api/certificado', function () {
+    auth();
+    (new \App\Controllers\ConfiguracionController())->eliminarCertificado();
+});
+$router->get('/api/certificado', function () {
+    auth();
+    (new \App\Controllers\ConfiguracionController())->estadoCertificado();
+});
 $router->get('/api/empresa', function () { auth(); (new \App\Controllers\PanelController())->procesar('getEmpresa', []); });
 $router->get('/api/sucursales', function () { auth(); (new \App\Controllers\PanelController())->procesar('listSucursales', []); });
 $router->get('/api/series', function () { auth(); (new \App\Controllers\DocumentoController())->procesarSeries(); });

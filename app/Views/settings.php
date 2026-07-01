@@ -25,19 +25,50 @@
         </div>
       </div>
     </div>
-    <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-      <button type="submit" id="cfg-save" class="btn-primary">
-        <i data-lucide="save" class="w-4 h-4"></i> Guardar configuración
-      </button>
-      <button type="button" id="cfg-test" class="btn-secondary">
-        <i data-lucide="wifi" class="w-4 h-4"></i> Probar conexión
-      </button>
-      <button type="button" id="cfg-ir-dashboard" class="btn-primary" style="display: none;">
-        <i data-lucide="arrow-right" class="w-4 h-4"></i> Ir al Dashboard
-      </button>
-    </div>
-    <div id="cfg-result" style="display: none;"></div>
   </form>
+
+  <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid rgb(226 232 240);" />
+
+  <div class="card">
+    <h2 class="section-title">
+      <i data-lucide="shield" class="w-5 h-5"></i> Certificado Digital
+    </h2>
+    <p style="font-size: 0.8rem; color: rgb(100 116 139); margin-bottom: 1rem;">
+      Sube tu certificado <strong>.p12</strong> o <strong>.pfx</strong> para firmar documentos electrónicos.
+    </p>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <div>
+        <label class="label">Archivo de certificado</label>
+        <input id="cfg-cert-file" type="file" accept=".p12,.pfx" class="input" style="padding: 0.5rem;" />
+      </div>
+      <div>
+        <label class="label">Contraseña del certificado</label>
+        <input id="cfg-cert-pass" type="password" class="input" placeholder="Ingresa la contraseña" />
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+        <button type="button" id="cfg-upload-cert" class="btn-primary">
+          <i data-lucide="upload" class="w-4 h-4"></i> Subir certificado
+        </button>
+        <button type="button" id="cfg-delete-cert" class="btn-danger" style="display: none;">
+          <i data-lucide="trash-2" class="w-4 h-4"></i> Eliminar certificado
+        </button>
+      </div>
+      <div id="cfg-cert-status" style="display: none;"></div>
+    </div>
+  </div>
+
+  <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 1.5rem;">
+    <button type="submit" form="config-form" class="btn-primary">
+      <i data-lucide="save" class="w-4 h-4"></i> Guardar configuración
+    </button>
+    <button type="button" id="cfg-test" class="btn-secondary">
+      <i data-lucide="wifi" class="w-4 h-4"></i> Probar conexión
+    </button>
+    <button type="button" id="cfg-ir-dashboard" class="btn-primary" style="display: none;">
+      <i data-lucide="arrow-right" class="w-4 h-4"></i> Ir al Dashboard
+    </button>
+  </div>
+  <div id="cfg-result" style="display: none; margin-top: 1rem;"></div>
   <style>
     @media (min-width: 640px) { .config-grid-2 { grid-template-columns: repeat(2, 1fr) !important; } }
   </style>

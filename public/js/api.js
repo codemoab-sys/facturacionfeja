@@ -100,6 +100,18 @@ var App = window.App || (window.App = {});
 
     probarConexion: function (data) { return request('POST', '/test-conexion', data); },
 
+    // ── Certificado digital ──
+    subirCertificado: function (formData) {
+      var url = BASE + '/certificado';
+      return fetch(url, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: formData,
+      }).then(function (r) { return r.json(); });
+    },
+    eliminarCertificado: function () { return request('DELETE', '/certificado'); },
+    estadoCertificado: function () { return request('GET', '/certificado'); },
+
     // ── Demo ──
     listarProductosDemo: function () { return request('GET', '/productos-demo'); },
     listarClientesDemo: function () { return request('GET', '/clientes-demo'); },
