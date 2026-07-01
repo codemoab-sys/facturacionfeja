@@ -159,19 +159,28 @@ class SunatApiService
         }
 
         $raw = json_decode($response, true);
+        $responseData = $response;
+
         if ($raw === null) {
-            return [
+            $result = [
                 'success' => $httpCode >= 200 && $httpCode < 300,
                 'message' => $httpCode >= 400 ? 'Error ' . $httpCode : 'Certificado enviado',
                 'data'    => $response,
             ];
+        } else {
+            $result = [
+                'success' => isset($raw['success']) ? (bool)$raw['success']
+                           : (($raw['estado'] ?? '') === 'exito'),
+                'message' => $raw['message'] ?? $raw['mensaje'] ?? null,
+                'data'    => $raw['data'] ?? $raw['datos'] ?? $raw,
+            ];
         }
 
-        return [
-            'success' => isset($raw['success']) ? (bool)$raw['success']
-                       : (($raw['estado'] ?? '') === 'exito'),
-            'message' => $raw['message'] ?? $raw['mensaje'] ?? null,
-            'data'    => $raw['data'] ?? $raw['datos'] ?? $raw,
+        $result['debug_api'] = [
+            'http_code'   => $httpCode,
+            'raw_body'    => mb_substr($responseData, 0, 2000),
         ];
+
+        return $result;
     }
 }

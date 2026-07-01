@@ -124,9 +124,16 @@ class ConfiguracionController extends Controller
             $api = new \App\Services\SunatApiService($apiConfig);
             try {
                 $result = $api->uploadCertificado($destino, $contrasena);
-                $this->json($result);
+                $this->json(array_merge(['debug_local' => 'reenviado a API remota'], $result));
                 return;
-            } catch (\Exception $e) {}
+            } catch (\Exception $e) {
+                $this->json([
+                    'success' => false,
+                    'message' => 'Error al enviar a la API remota: ' . $e->getMessage(),
+                    'debug'   => $e->getMessage(),
+                ]);
+                return;
+            }
         }
 
         $this->json(['success' => true, 'message' => 'Certificado guardado localmente.']);
