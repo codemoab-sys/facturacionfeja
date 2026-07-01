@@ -112,6 +112,18 @@ var App = window.App || (window.App = {});
     eliminarCertificado: function () { return request('DELETE', '/certificado'); },
     estadoCertificado: function () { return request('GET', '/certificado'); },
 
+    // ── Logo empresa ──
+    subirLogo: function (formData) {
+      var url = BASE + '/logo';
+      return fetch(url, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: formData,
+      }).then(function (r) { return r.json(); });
+    },
+    eliminarLogo: function () { return request('DELETE', '/logo'); },
+    estadoLogo: function () { return request('GET', '/logo'); },
+
     // ── Demo ──
     listarProductosDemo: function () { return request('GET', '/productos-demo'); },
     listarClientesDemo: function () { return request('GET', '/clientes-demo'); },

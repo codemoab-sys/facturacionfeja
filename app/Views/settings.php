@@ -68,6 +68,34 @@
         <div id="cfg-cert-status" style="display: none;"></div>
       </div>
     </div>
+
+    <div class="card">
+      <h2 class="section-title">
+        <i data-lucide="image" class="w-5 h-5"></i> Logo de la Empresa
+      </h2>
+      <p style="font-size: 0.8rem; color: rgb(100 116 139); margin-bottom: 1rem;">
+        Sube el logo de tu empresa. Aparecer&aacute; en el sistema en lugar del logo por defecto.
+      </p>
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <div id="cfg-logo-preview" style="display: none; margin-bottom: 0.5rem;">
+          <label class="label">Logo actual</label>
+          <img id="cfg-logo-img" src="" alt="Logo" style="max-height: 4rem; border-radius: 0.5rem;" />
+        </div>
+        <div>
+          <label class="label">Archivo de logo</label>
+          <input id="cfg-logo-file" type="file" accept=".png,.jpg,.jpeg,.gif,.svg" class="input" style="padding: 0.5rem;" />
+        </div>
+        <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+          <button type="button" id="cfg-upload-logo" class="btn-primary">
+            <i data-lucide="upload" class="w-4 h-4"></i> Subir logo
+          </button>
+          <button type="button" id="cfg-delete-logo" class="btn-danger" style="display: none;">
+            <i data-lucide="trash-2" class="w-4 h-4"></i> Eliminar logo
+          </button>
+        </div>
+        <div id="cfg-logo-status" style="display: none;"></div>
+      </div>
+    </div>
   </div>
 
   <style>

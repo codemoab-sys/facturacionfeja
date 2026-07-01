@@ -51,6 +51,21 @@ $router->get('/api/certificado', function () {
     auth();
     (new \App\Controllers\ConfiguracionController())->estadoCertificado();
 });
+$router->post('/api/logo', function () {
+    auth();
+    (new \App\Controllers\ConfiguracionController())->subirLogo();
+});
+$router->delete('/api/logo', function () {
+    auth();
+    (new \App\Controllers\ConfiguracionController())->eliminarLogo();
+});
+$router->get('/api/logo', function () {
+    auth();
+    (new \App\Controllers\ConfiguracionController())->estadoLogo();
+});
+$router->get('/api/logo-imagen', function () {
+    (new \App\Controllers\ConfiguracionController())->imagenLogo();
+});
 $router->get('/api/empresa', function () { auth(); (new \App\Controllers\PanelController())->procesar('getEmpresa', []); });
 $router->get('/api/sucursales', function () { auth(); (new \App\Controllers\PanelController())->procesar('listSucursales', []); });
 $router->get('/api/series', function () { auth(); (new \App\Controllers\DocumentoController())->procesarSeries(); });

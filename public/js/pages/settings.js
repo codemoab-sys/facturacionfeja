@@ -20,6 +20,7 @@ App.Settings = class Settings {
       }
     } catch (e) {}
     this._checkCert();
+    this._checkLogo();
     this._bind();
     App.refreshIcons();
   }
@@ -37,6 +38,8 @@ App.Settings = class Settings {
     });
     this.container.querySelector('#cfg-upload-cert').addEventListener('click', function () { self._uploadCert(); });
     this.container.querySelector('#cfg-delete-cert').addEventListener('click', function () { self._deleteCert(); });
+    this.container.querySelector('#cfg-upload-logo').addEventListener('click', function () { self._uploadLogo(); });
+    this.container.querySelector('#cfg-delete-logo').addEventListener('click', function () { self._deleteLogo(); });
   }
 
   async _save() {
@@ -168,11 +171,86 @@ App.Settings = class Settings {
     App.refreshIcons();
   }
 
-  async _checkCert() {
+  async _uploadLogo() {
+    var fileInput = this.container.querySelector('#cfg-logo-file');
+    var btn = this.container.querySelector('#cfg-upload-logo');
+    var statusDiv = this.container.querySelector('#cfg-logo-status');
+
+    if (!fileInput.files || !fileInput.files[0]) {
+      statusDiv.style.display = 'block';
+      statusDiv.innerHTML = '<div style="padding: 0.75rem; background: rgb(254 242 242); border-radius: 0.75rem; color: rgb(185 28 28); display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="x-circle" class="w-4 h-4"></i> Selecciona un archivo de imagen</div>';
+      App.refreshIcons();
+      return;
+    }
+
+    var formData = new FormData();
+    formData.append('logo', fileInput.files[0]);
+
+    btn.disabled = true;
+    btn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 icon-spin"></i> Subiendo...';
+    statusDiv.style.display = 'none';
+    App.refreshIcons();
+
     try {
-      var res = await App.api.estadoCertificado();
-      if (res.success && res.data && res.data.tiene_certificado) {
-        this.container.querySelector('#cfg-delete-cert').style.display = 'inline-flex';
+      var res = await App.api.subirLogo(formData);
+      statusDiv.style.display = 'block';
+      if (res.success) {
+        statusDiv.innerHTML = '<div style="padding: 0.75rem; background: rgb(220 252 231); border-radius: 0.75rem; color: rgb(22 101 52); display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="check-circle-2" class="w-4 h-4"></i> Logo subido correctamente</div>';
+        this.container.querySelector('#cfg-delete-logo').style.display = 'inline-flex';
+        this._showLogoPreview();
+      } else {
+        statusDiv.innerHTML = '<div style="padding: 0.75rem; background: rgb(254 242 242); border-radius: 0.75rem; color: rgb(185 28 28); display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="x-circle" class="w-4 h-4"></i> ' + App.escapeHtml(res.message || 'Error al subir logo') + '</div>';
+      }
+    } catch (e) {
+      statusDiv.style.display = 'block';
+      statusDiv.innerHTML = '<div style="padding: 0.75rem; background: rgb(254 242 242); border-radius: 0.75rem; color: rgb(185 28 28); display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="x-circle" class="w-4 h-4"></i> ' + App.escapeHtml(e.message) + '</div>';
+    }
+    btn.disabled = false;
+    btn.innerHTML = '<i data-lucide="upload" class="w-4 h-4"></i> Subir logo';
+    App.refreshIcons();
+  }
+
+  async _deleteLogo() {
+    var btn = this.container.querySelector('#cfg-delete-logo');
+    var statusDiv = this.container.querySelector('#cfg-logo-status');
+
+    if (!confirm('\u00bfEliminar logo?')) return;
+
+    btn.disabled = true;
+    statusDiv.style.display = 'none';
+
+    try {
+      var res = await App.api.eliminarLogo();
+      statusDiv.style.display = 'block';
+      if (res.success) {
+        statusDiv.innerHTML = '<div style="padding: 0.75rem; background: rgb(254 243 199); border-radius: 0.75rem; color: rgb(146 64 14); display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="info" class="w-4 h-4"></i> Logo eliminado</div>';
+        this.container.querySelector('#cfg-delete-logo').style.display = 'none';
+        this.container.querySelector('#cfg-logo-preview').style.display = 'none';
+      } else {
+        statusDiv.innerHTML = '<div style="padding: 0.75rem; background: rgb(254 242 242); border-radius: 0.75rem; color: rgb(185 28 28); display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="x-circle" class="w-4 h-4"></i> ' + App.escapeHtml(res.message || 'Error') + '</div>';
+      }
+    } catch (e) {
+      statusDiv.style.display = 'block';
+      statusDiv.innerHTML = '<div style="padding: 0.75rem; background: rgb(254 242 242); border-radius: 0.75rem; color: rgb(185 28 28); display: flex; align-items: center; gap: 0.5rem;"><i data-lucide="x-circle" class="w-4 h-4"></i> ' + App.escapeHtml(e.message) + '</div>';
+    }
+    btn.disabled = false;
+    App.refreshIcons();
+  }
+
+  async _showLogoPreview() {
+    var preview = this.container.querySelector('#cfg-logo-preview');
+    var img = this.container.querySelector('#cfg-logo-img');
+    var base = typeof BASE_PATH !== 'undefined' ? BASE_PATH : '';
+    img.src = base + '/api/logo-imagen?' + Date.now();
+    preview.style.display = 'block';
+  }
+
+  async _checkLogo() {
+    try {
+      var res = await App.api.estadoLogo();
+      if (res.success && res.data && res.data.tiene_logo) {
+        this.container.querySelector('#cfg-delete-logo').style.display = 'inline-flex';
+        this._showLogoPreview();
       }
     } catch (e) {}
   }

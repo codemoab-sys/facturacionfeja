@@ -117,6 +117,64 @@ class SunatApiService
         return $this->request('DELETE', $path);
     }
 
+    public function uploadLogo($logoPath)
+    {
+        $url = $this->baseUrl . '/empresa/logo';
+        $headers = [
+            'Accept: application/json',
+            'X-Api-Key: ' . $this->apiKey,
+            'X-Api-Secret: ' . $this->apiSecret,
+        ];
+
+        $ch = curl_init($url);
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST           => true,
+            CURLOPT_HTTPHEADER     => $headers,
+            CURLOPT_TIMEOUT        => 60,
+            CURLOPT_CONNECTTIMEOUT => 10,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_SSL_VERIFYHOST => false,
+            CURLOPT_USERAGENT      => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        ]);
+
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime = finfo_file($finfo, $logoPath);
+        finfo_close($finfo);
+
+        $filename = new \CURLFile($logoPath, $mime, basename($logoPath));
+        $postData = ['logo' => $filename];
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error = curl_error($ch);
+        curl_close($ch);
+
+        if ($error) {
+            return [
+                'success' => false,
+                'message' => 'Error de conexi\u00f3n: ' . $error,
+            ];
+        }
+
+        $raw = json_decode($response, true);
+        if ($raw === null) {
+            return [
+                'success' => $httpCode >= 200 && $httpCode < 300,
+                'message' => $httpCode >= 400 ? 'Error ' . $httpCode : 'Logo enviado',
+                'data'    => $response,
+            ];
+        }
+
+        return [
+            'success' => isset($raw['success']) ? (bool)$raw['success']
+                       : (($raw['estado'] ?? '') === 'exito'),
+            'message' => $raw['message'] ?? $raw['mensaje'] ?? 'Logo enviado',
+            'data'    => $raw['data'] ?? $raw['datos'] ?? $raw,
+        ];
+    }
+
     public function uploadCertificado($certPath, $password)
     {
         $url = $this->baseUrl . '/empresa/certificado';
