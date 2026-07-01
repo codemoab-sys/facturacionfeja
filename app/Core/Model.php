@@ -13,7 +13,11 @@ class Model
     protected static function getPDO()
     {
         if (self::$pdo === null) {
-            $config = require __DIR__ . '/../../config/database.php';
+            $configFile = __DIR__ . '/../../config/database.php';
+            if (!file_exists($configFile)) {
+                $configFile = __DIR__ . '/../../config/database.example.php';
+            }
+            $config = require $configFile;
             try {
                 $dsn = "mysql:host={$config['host']};port={$config['port']};dbname={$config['dbname']};charset={$config['charset']}";
                 self::$pdo = new PDO($dsn, $config['username'], $config['password'], [

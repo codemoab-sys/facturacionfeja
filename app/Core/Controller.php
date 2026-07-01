@@ -43,8 +43,7 @@ class Controller
 
     protected function redirect($path)
     {
-        $base = rtrim(getenv('APP_URL') ?: '', '/');
-        header('Location: ' . $base . $path);
+        header('Location: ' . (BASE_PATH ?: '') . $path);
         exit;
     }
 

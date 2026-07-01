@@ -1,2 +1,4 @@
-.env
+config/database.php
 storage/logs/*.log
+storage/certificates/*.p12
+storage/certificates/*.pfx
