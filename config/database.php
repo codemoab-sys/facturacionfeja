@@ -1,10 +1,10 @@
 <?php
-// Lee credenciales desde .env — edita .env, NO este archivo
+// CAMBIA estos valores por los de tu hosting
 return [
-    'host'    => getenv('DB_HOST') ?: '127.0.0.1',
-    'port'    => getenv('DB_PORT') ?: '3306',
-    'dbname'  => getenv('DB_NAME') ?: 'facturacionfeja',
-    'username'=> getenv('DB_USER') ?: '',
-    'password'=> getenv('DB_PASS') ?: '',
+    'host'    => 'localhost',
+    'port'    => '3306',
+    'dbname'  => 'avicola1_facturacionfeja',
+    'username' => 'avicola1_facturacionfeja',
+    'password' => 'aquí_tu_contraseña',
     'charset' => 'utf8mb4',
 ];
