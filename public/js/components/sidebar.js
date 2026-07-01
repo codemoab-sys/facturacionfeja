@@ -68,6 +68,7 @@ var App = window.App || (window.App = {});
       var s = this.session;
       if (!s) return '';
       var initial = (s.usuario || 'de').substring(0, 2).toUpperCase();
+      var isDark = document.documentElement.classList.contains('dark');
       return ''
         + '<div style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; background: rgb(248 250 252); border-radius: 0.75rem;">'
           + '<div style="width: 2rem; height: 2rem; background: rgb(37 99 235); color: white; border-radius: 9999px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; flex-shrink: 0;">'
@@ -77,6 +78,9 @@ var App = window.App || (window.App = {});
             + '<div style="font-size: 0.75rem; font-weight: 700; color: rgb(15 23 42); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">' + App.escapeHtml(s.nombre) + '</div>'
             + '<div style="font-size: 0.625rem; color: rgb(100 116 139); text-transform: uppercase; letter-spacing: 0.05em;">@' + App.escapeHtml(s.usuario) + '</div>'
           + '</div>'
+          + '<button id="sidebar-darkmode" title="Modo oscuro" style="padding: 0.375rem; color: rgb(148 163 184); background: transparent; border: none; border-radius: 0.375rem; cursor: pointer; flex-shrink: 0;">'
+            + '<i data-lucide="' + (isDark ? 'sun' : 'moon') + '" class="w-4 h-4"></i>'
+          + '</button>'
           + '<button id="sidebar-logout" title="Cerrar sesi\u00f3n" style="padding: 0.375rem; color: rgb(148 163 184); background: transparent; border: none; border-radius: 0.375rem; cursor: pointer; flex-shrink: 0;">'
             + '<i data-lucide="log-out" class="w-4 h-4"></i>'
           + '</button>'
@@ -105,6 +109,8 @@ var App = window.App || (window.App = {});
       });
       var closeBtn = this.root.querySelector('#sidebar-close');
       if (closeBtn && this.onClose) closeBtn.addEventListener('click', function () { self.onClose(); });
+      var dmBtn = this.root.querySelector('#sidebar-darkmode');
+      if (dmBtn) dmBtn.addEventListener('click', function () { App.toggleDarkMode(); self.render(self.root); });
       var logoutBtn = this.root.querySelector('#sidebar-logout');
       if (logoutBtn && this.onLogout) logoutBtn.addEventListener('click', function () { self.onLogout(); });
     }

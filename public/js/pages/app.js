@@ -102,5 +102,23 @@ var App = window.App || (window.App = {});
     }
   }
 
+  // Dark mode
+  App.toggleDarkMode = function () {
+    var html = document.documentElement;
+    html.classList.toggle('dark');
+    try { localStorage.setItem('darkMode', html.classList.contains('dark') ? '1' : '0'); } catch (e) {}
+  };
+
+  function initDarkMode() {
+    var isDark = localStorage.getItem('darkMode');
+    if (isDark === null && window.matchMedia) {
+      isDark = window.matchMedia('(prefers-color-scheme: dark)').matches ? '1' : '0';
+    }
+    if (isDark === '1') {
+      document.documentElement.classList.add('dark');
+    }
+  }
+
+  initDarkMode();
   document.addEventListener('DOMContentLoaded', initPage);
 })();
