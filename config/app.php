@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 $scriptDir = dirname($_SERVER['SCRIPT_NAME']);
 define('BASE_PATH', ($scriptDir === '/' || $scriptDir === '\\') ? '' : rtrim($scriptDir, '/'));
 define('API_DEFAULT_BASE_URL', 'https://apiprueba.moabcode.com/api/v1');
