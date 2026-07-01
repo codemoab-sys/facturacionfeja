@@ -134,4 +134,15 @@ html.dark .input-inline { color: rgb(226 232 240); }
 html.dark ::-webkit-scrollbar-thumb { background-color: rgb(51 65 85); }
 html.dark ::-webkit-scrollbar-thumb:hover { background-color: rgb(71 85 105); }
 html.dark #sidebar-content { background: rgb(15 23 42); }
-html.dark [id^="app-sidebar"] { background: rgb(15 23 42); }
+html.dark [id^="app-sidebar"] { background: rgb(15 23 42) !important; }
+html.dark #root > .min-h-screen { background: rgb(15 23 42) !important; }
+html.dark #root header { background: rgb(15 23 42 / 0.9) !important; backdrop-filter: blur(6px); }
+html.dark #page-container { background: transparent; }
+html.dark #page-container div[style*="background: white"],
+html.dark #page-container div[style*="background: rgb(255"] { background: rgb(30 41 59) !important; }
+html.dark #sidebar-content div[style*="background: rgb(248 250 252)"] { background: rgb(30 41 59) !important; }
+html.dark #sidebar-content div[style*="color: rgb(15 23 42)"] { color: rgb(226 232 240) !important; }
+html.dark #sidebar-content button[style*="color: rgb(148 163 184)"] { color: rgb(148 163 184) !important; }
+html.dark .bg-white { background-color: rgb(30 41 59) !important; }
+html.dark div[style*="background: white"] { background: rgb(30 41 59) !important; }
+html.dark div[style*="background: rgb(255 255 255"] { background: rgb(30 41 59) !important; }
