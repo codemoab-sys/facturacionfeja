@@ -4,6 +4,10 @@ declare(strict_types=1);
 $router = \App\Framework\App::getInstance()->getRouter();
 
 use App\Framework\Session;
+use App\Framework\Database\Connection;
+
+// ── API Health ──
+$router->get('/api/health', function () { echo json_encode(Connection::test()); exit; });
 
 // ── API Config ──
 $router->get('/api/config', function () { auth(); ctrl(\App\Modules\Settings\Controllers\SettingsApiController::class)->mostrar(); });
