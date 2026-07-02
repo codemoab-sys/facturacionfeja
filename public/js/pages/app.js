@@ -46,6 +46,7 @@ var App = window.App || (window.App = {});
       '/nueva-guia':           'NewDispatchGuide',
       '/configuracion':        'Settings',
       '/resumenes':            'Summaries',
+      '/productos':            'Productos',
     };
     if (routes[path]) return routes[path];
     if (path.startsWith('/documentos/')) return 'DocumentList';

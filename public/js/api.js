@@ -144,6 +144,12 @@ var App = window.App || (window.App = {});
     },
     logout: function () { window.location.href = (typeof BASE_PATH !== 'undefined' ? BASE_PATH : '') + '/logout'; },
     testConexion: function (data) { return request('POST', '/test-conexion', data); },
+    // ── Productos ──
+    listarProductos: function (buscar) { return request('GET', '/productos' + (buscar ? '?buscar=' + encodeURIComponent(buscar) : '')); },
+    obtenerProducto: function (id) { return request('GET', '/productos/' + id); },
+    guardarProducto: function (data, id) { return id ? request('PUT', '/productos/' + id, data) : request('POST', '/productos', data); },
+    eliminarProducto: function (id) { return request('DELETE', '/productos/' + id); },
+    listarCategorias: function () { return request('GET', '/categorias'); },
     productosDemo: function () { return request('GET', '/productos-demo'); },
     clientesDemo: function () { return request('GET', '/clientes-demo'); },
   };

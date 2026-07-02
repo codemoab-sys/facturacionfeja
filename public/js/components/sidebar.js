@@ -12,6 +12,9 @@ var App = window.App || (window.App = {});
     { path: '/nueva-guia', icon: 'truck', label: 'Gu\u00eda de Remisi\u00f3n' },
     { path: '/resumenes', icon: 'file-stack', label: 'Resumen Diario' },
   ];
+  var LINKS_ADMIN = [
+    { path: '/productos', icon: 'package', label: 'Productos' },
+  ];
   var LINKS_CONSULTAR = [
     { path: '/documentos/facturas', icon: 'clipboard-list', label: 'Facturas' },
     { path: '/documentos/boletas', icon: 'clipboard-list', label: 'Boletas' },
@@ -57,6 +60,8 @@ var App = window.App || (window.App = {});
           + LINKS_EMITIR.map(function (l) { return self._linkHTML(l); }).join('')
           + '<div class="nav-section-label">Consultar</div>'
           + LINKS_CONSULTAR.map(function (l) { return self._linkHTML(l); }).join('')
+          + '<div class="nav-section-label">Administrar</div>'
+          + LINKS_ADMIN.map(function (l) { return self._linkHTML(l); }).join('')
         + '</nav>'
         + '<div class="p-4" style="display: flex; flex-direction: column; gap: 0.5rem;">'
           + this._linkHTML({ path: '/configuracion', icon: 'settings', label: 'Configuraci\u00f3n' })

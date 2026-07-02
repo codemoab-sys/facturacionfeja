@@ -65,20 +65,21 @@ App.ProductPicker = class ProductPicker {
 
   render(container) {
     var self = this;
-    if (!App.PRODUCTOS_DEMO || App.PRODUCTOS_DEMO.length === 0) {
-      App.api.productosDemo().then(function (res) {
-        if (res.success && res.data) {
-          App.PRODUCTOS_DEMO = res.data;
-          self.productos = res.data;
-          self._doRender(container);
-        }
-      }).catch(function () {
-        App.PRODUCTOS_DEMO = [];
-        self._doRender(container);
-      });
-    } else {
+    App.api.listarProductos().then(function (res) {
+      if (res.success && res.data && res.data.length > 0) {
+        self.productos = res.data;
+      } else {
+        return App.api.productosDemo().then(function (res2) {
+          if (res2.success && res2.data) {
+            self.productos = res2.data;
+          }
+        });
+      }
+    }).catch(function () {
+      self.productos = App.PRODUCTOS_DEMO || [];
+    }).finally(function () {
       self._doRender(container);
-    }
+    });
   }
 
   _doRender(container) {

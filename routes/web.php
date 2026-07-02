@@ -117,8 +117,16 @@ $router->get('/api/panel/ventas-mensuales', function () { auth(); ctrl(\App\Cont
 $router->get('/api/panel/estado-sunat', function () { auth(); ctrl(\App\Controladores\PanelControlador::class)->procesar('panelEstadoSunat', []); });
 $router->get('/api/panel/por-moneda', function () { auth(); ctrl(\App\Controladores\PanelControlador::class)->procesar('panelPorMoneda', []); });
 
+// ── Productos CRUD ──
+$router->get('/api/productos', function () { auth(); ctrl(\App\Controladores\ProductoControlador::class)->listar(); });
+$router->get('/api/productos/{id}', function ($p) { auth(); ctrl(\App\Controladores\ProductoControlador::class)->obtener([$p]); });
+$router->post('/api/productos', function () { auth(); ctrl(\App\Controladores\ProductoControlador::class)->guardar(); });
+$router->put('/api/productos/{id}', function ($p) { auth(); ctrl(\App\Controladores\ProductoControlador::class)->guardar([$p]); });
+$router->delete('/api/productos/{id}', function ($p) { auth(); ctrl(\App\Controladores\ProductoControlador::class)->eliminar([$p]); });
+$router->get('/api/categorias', function () { auth(); ctrl(\App\Controladores\ProductoControlador::class)->listarCategorias(); });
+
 // ── Demo data endpoints ──
-$router->get('/api/productos-demo', function () { auth(); ctrl(\App\Controladores\ProductoControlador::class)->listar(); });
+$router->get('/api/productos-demo', function () { auth(); ctrl(\App\Controladores\ProductoControlador::class)->listarDemo(); });
 $router->get('/api/clientes-demo', function () { auth(); ctrl(\App\Controladores\ClienteControlador::class)->listarDemo(); });
 
 // ── Pages (render HTML) ──
@@ -128,6 +136,7 @@ $router->get('/nueva-boleta', function () { auth(); ctrl(\App\Controladores\Bole
 $router->get('/nueva-nc', function () { auth(); ctrl(\App\Controladores\NotaCreditoControlador::class)->create(); });
 $router->get('/nueva-nd', function () { auth(); ctrl(\App\Controladores\NotaDebitoControlador::class)->create(); });
 $router->get('/nueva-guia', function () { auth(); ctrl(\App\Controladores\GuiaRemisionControlador::class)->create(); });
+$router->get('/productos', function () { auth(); ctrl(\App\Controladores\ProductoControlador::class)->index(); });
 $router->get('/configuracion', function () { auth(); ctrl(\App\Controladores\ConfiguracionControlador::class)->index(); });
 $router->get('/documentos/{tipo}', function ($p) { auth(); ctrl(\App\Controladores\DocumentoControlador::class)->index($p); });
 $router->get('/resumenes', function () { auth(); ctrl(\App\Controladores\ResumenControlador::class)->index(); });

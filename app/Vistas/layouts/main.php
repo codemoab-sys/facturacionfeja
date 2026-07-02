@@ -92,6 +92,7 @@ if (!$hasApiConfig):
   <script src="<?= asset('js/pages/newDebitNote.js') ?>"></script>
   <script src="<?= asset('js/pages/newDispatchGuide.js') ?>"></script>
   <script src="<?= asset('js/pages/documentList.js') ?>"></script>
+  <script src="<?= asset('js/pages/productos.js') ?>"></script>
   <script src="<?= asset('js/pages/summaries.js') ?>"></script>
   <script src="<?= asset('js/pages/app.js') ?>"></script>
 </body>
