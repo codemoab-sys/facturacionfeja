@@ -69,6 +69,10 @@ class ErrorHandler
         if (strpos($_SERVER['REQUEST_URI'] ?? '', '/api/') === 0) {
             return true;
         }
+        // POST a rutas de página desde JS fetch — el frontend espera JSON
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty(pathinfo($_SERVER['REQUEST_URI'] ?? '', PATHINFO_EXTENSION))) {
+            return true;
+        }
         return false;
     }
 

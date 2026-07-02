@@ -27,10 +27,14 @@ class LoginController extends Controller
 
     public function iniciarSesion(array $params = []): void
     {
-        $usuario = trim($this->request->post('usuario', ''));
-        $password = $this->request->post('password', '');
-        $result = $this->authService->login($usuario, $password);
-        $this->json($result->toArray(), $result->getStatusCode());
+        try {
+            $usuario = trim($this->request->post('usuario', ''));
+            $password = $this->request->post('password', '');
+            $result = $this->authService->login($usuario, $password);
+            $this->json($result->toArray(), $result->getStatusCode());
+        } catch (\Throwable $e) {
+            $this->json(['success' => false, 'message' => $e->getMessage()], 500);
+        }
     }
 
     public function cerrarSesion(array $params = []): void
