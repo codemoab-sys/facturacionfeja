@@ -23,13 +23,21 @@ if (!is_dir($logDir)) {
 
 spl_autoload_register(function (string $class): void {
     $prefix = 'App\\';
-    $baseDir = __DIR__ . '/app/';
     $len = strlen($prefix);
     if (strncmp($prefix, $class, $len) !== 0) {
         return;
     }
     $relativeClass = substr($class, $len);
-    $file = $baseDir . str_replace('\\', '/', $relativeClass) . '.php';
+
+    // Check src/ first (new modular architecture)
+    $file = __DIR__ . '/src/' . str_replace('\\', '/', $relativeClass) . '.php';
+    if (file_exists($file)) {
+        require $file;
+        return;
+    }
+
+    // Fallback to app/ (legacy)
+    $file = __DIR__ . '/app/' . str_replace('\\', '/', $relativeClass) . '.php';
     if (file_exists($file)) {
         require $file;
     }
@@ -49,5 +57,5 @@ $debug = ($_SERVER['SERVER_NAME'] ?? '') === 'localhost' || ($_SERVER['SERVER_AD
 $errorHandler = new \App\Nucleo\ManejadorErrores($debug);
 $errorHandler->register();
 
-$app = \App\Nucleo\App::getInstance();
+$app = \App\Framework\App::getInstance();
 $app->run();

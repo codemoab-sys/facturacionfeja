@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-use App\Nucleo\Contenedor;
-use App\Nucleo\Sesion;
+use App\Framework\Container;
+use App\Framework\Session;
 
 function auth(): void
 {
-    if (!Sesion::has('user_id')) {
+    if (!Session::has('user_id')) {
         $uri = $_SERVER['REQUEST_URI'] ?? '/';
         $isApi = strpos($uri, '/api/') !== false || strpos($uri, BASE_PATH . '/api/') !== false;
         if ($isApi) {
@@ -22,5 +22,5 @@ function auth(): void
 
 function ctrl(string $class): object
 {
-    return Contenedor::getInstance()->make($class);
+    return Container::getInstance()->make($class);
 }
