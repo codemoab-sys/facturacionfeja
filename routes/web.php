@@ -125,6 +125,13 @@ $router->post('/api/productos/{id}', function ($p) { auth(); ctrl(\App\Controlad
 $router->delete('/api/productos/{id}', function ($p) { auth(); ctrl(\App\Controladores\ProductoControlador::class)->eliminar([$p]); });
 $router->get('/api/categorias', function () { auth(); ctrl(\App\Controladores\ProductoControlador::class)->listarCategorias(); });
 
+// ── Clientes CRUD ──
+$router->get('/api/clientes-local', function () { auth(); ctrl(\App\Controladores\ClienteControlador::class)->listar(); });
+$router->get('/api/clientes-local/{id}', function ($p) { auth(); ctrl(\App\Controladores\ClienteControlador::class)->obtener([$p]); });
+$router->post('/api/clientes-local', function () { auth(); ctrl(\App\Controladores\ClienteControlador::class)->guardar(); });
+$router->post('/api/clientes-local/{id}', function ($p) { auth(); ctrl(\App\Controladores\ClienteControlador::class)->guardar([$p]); });
+$router->delete('/api/clientes-local/{id}', function ($p) { auth(); ctrl(\App\Controladores\ClienteControlador::class)->eliminar([$p]); });
+
 // ── Demo data endpoints ──
 $router->get('/api/productos-demo', function () { auth(); ctrl(\App\Controladores\ProductoControlador::class)->listarDemo(); });
 $router->get('/api/clientes-demo', function () { auth(); ctrl(\App\Controladores\ClienteControlador::class)->listarDemo(); });
@@ -137,6 +144,7 @@ $router->get('/nueva-nc', function () { auth(); ctrl(\App\Controladores\NotaCred
 $router->get('/nueva-nd', function () { auth(); ctrl(\App\Controladores\NotaDebitoControlador::class)->create(); });
 $router->get('/nueva-guia', function () { auth(); ctrl(\App\Controladores\GuiaRemisionControlador::class)->create(); });
 $router->get('/productos', function () { auth(); ctrl(\App\Controladores\ProductoControlador::class)->index(); });
+$router->get('/clientes', function () { auth(); ctrl(\App\Controladores\ClienteControlador::class)->index(); });
 $router->get('/configuracion', function () { auth(); ctrl(\App\Controladores\ConfiguracionControlador::class)->index(); });
 $router->get('/documentos/{tipo}', function ($p) { auth(); ctrl(\App\Controladores\DocumentoControlador::class)->index($p); });
 $router->get('/resumenes', function () { auth(); ctrl(\App\Controladores\ResumenControlador::class)->index(); });

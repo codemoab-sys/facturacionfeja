@@ -99,20 +99,21 @@ App.ClientPicker = class ClientPicker {
 
   render(container) {
     var self = this;
-    if (!App.CLIENTES_DEMO || App.CLIENTES_DEMO.length === 0) {
-      App.api.clientesDemo().then(function (res) {
-        if (res.success && res.data) {
-          App.CLIENTES_DEMO = res.data;
-          self.clientes = res.data;
-        }
-        self._doRender(container);
-      }).catch(function () {
-        App.CLIENTES_DEMO = [];
-        self._doRender(container);
-      });
-    } else {
+    App.api.listarClientesLocal().then(function (res) {
+      if (res.success && res.data && res.data.length > 0) {
+        self.clientes = res.data;
+      } else {
+        return App.api.clientesDemo().then(function (res2) {
+          if (res2.success && res2.data) {
+            self.clientes = res2.data;
+          }
+        });
+      }
+    }).catch(function () {
+      self.clientes = App.CLIENTES_DEMO || [];
+    }).finally(function () {
       self._doRender(container);
-    }
+    });
   }
 
   _doRender(container) {

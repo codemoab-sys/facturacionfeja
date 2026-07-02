@@ -150,6 +150,11 @@ var App = window.App || (window.App = {});
     guardarProducto: function (data, id) { return request('POST', id ? '/productos/' + id : '/productos', data); },
     eliminarProducto: function (id) { return request('DELETE', '/productos/' + id); },
     listarCategorias: function () { return request('GET', '/categorias'); },
+    // ── Clientes ──
+    listarClientesLocal: function (buscar) { return request('GET', '/clientes-local' + (buscar ? '?buscar=' + encodeURIComponent(buscar) : '')); },
+    obtenerCliente: function (id) { return request('GET', '/clientes-local/' + id); },
+    guardarCliente: function (data, id) { return request('POST', id ? '/clientes-local/' + id : '/clientes-local', data); },
+    eliminarCliente: function (id) { return request('DELETE', '/clientes-local/' + id); },
     productosDemo: function () { return request('GET', '/productos-demo'); },
     clientesDemo: function () { return request('GET', '/clientes-demo'); },
   };

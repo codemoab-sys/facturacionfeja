@@ -47,6 +47,7 @@ var App = window.App || (window.App = {});
       '/configuracion':        'Settings',
       '/resumenes':            'Summaries',
       '/productos':            'Productos',
+      '/clientes':             'Clientes',
     };
     if (routes[path]) return routes[path];
     if (path.startsWith('/documentos/')) return 'DocumentList';

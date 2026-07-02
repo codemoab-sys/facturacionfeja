@@ -14,6 +14,7 @@ var App = window.App || (window.App = {});
   ];
   var LINKS_ADMIN = [
     { path: '/productos', icon: 'package', label: 'Productos' },
+    { path: '/clientes', icon: 'users', label: 'Clientes' },
   ];
   var LINKS_CONSULTAR = [
     { path: '/documentos/facturas', icon: 'clipboard-list', label: 'Facturas' },
