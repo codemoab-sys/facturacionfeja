@@ -45,6 +45,7 @@ class AuthService
         try {
             $found = $this->userRepository->findByUsername($usuario);
         } catch (\Exception $e) {
+            $this->log('LOGIN_DB_ERROR', $usuario, $e->getMessage() . ' in ' . $e->getFile() . ':' . $e->getLine());
             return ResultadoDTO::error('Error de conexión con la base de datos.', null, 500);
         }
 
