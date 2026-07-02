@@ -245,6 +245,15 @@ App.Settings = class Settings {
     preview.style.display = 'block';
   }
 
+  async _checkCert() {
+    try {
+      var res = await App.api.estadoCertificado();
+      if (res.success && res.data && res.data.tiene_certificado) {
+        this.container.querySelector('#cfg-delete-cert').style.display = 'inline-flex';
+      }
+    } catch (e) {}
+  }
+
   async _checkLogo() {
     try {
       var res = await App.api.estadoLogo();

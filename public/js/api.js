@@ -124,11 +124,6 @@ var App = window.App || (window.App = {});
     eliminarLogo: function () { return request('DELETE', '/logo'); },
     estadoLogo: function () { return request('GET', '/logo'); },
 
-    // ── Demo ──
-    listarProductosDemo: function () { return request('GET', '/productos-demo'); },
-    listarProductosDemo: function () { return request('GET', '/productos-demo'); },
-    listarClientesDemo: function () { return request('GET', '/clientes-demo'); },
-
     // ── Inventario ──
     inventarioProductos: function (buscar) { return request('GET', '/inventario/productos' + (buscar ? '?buscar=' + encodeURIComponent(buscar) : '')); },
     inventarioMovimientos: function (filtros) {

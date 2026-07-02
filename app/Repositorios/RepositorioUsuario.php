@@ -5,20 +5,20 @@ namespace App\Repositorios;
 
 class RepositorioUsuario extends RepositorioBase
 {
-    private string $table = 'users';
+    private string $tabla = 'users';
 
     public function findByUsername(string $username): ?array
     {
-        return $this->findOneBy($this->table, 'usuario', $username);
+        return $this->findOneBy($this->tabla, 'usuario', $username);
     }
 
     public function findById(int $id): ?array
     {
-        return $this->find($this->table, $id);
+        return $this->find($this->tabla, $id);
     }
 
     public function createUser(array $data): int
     {
-        return $this->create($this->table, $data);
+        return $this->create($this->tabla, $data);
     }
 }

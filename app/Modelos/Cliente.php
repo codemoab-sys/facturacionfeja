@@ -27,7 +27,7 @@ class Cliente extends Modelo
         }
 
         $sql .= " ORDER BY razon_social ASC";
-        return $this->query($sql, $params);
+        return $this->raw($sql, $params);
     }
 
     public function crear(array $data): int

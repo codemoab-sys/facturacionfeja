@@ -6,7 +6,7 @@ App.ProductPicker = class ProductPicker {
     this.onClose = opts.onClose;
     this.query = '';
     this.overlay = null;
-    this.productos = App.PRODUCTOS_DEMO || [];
+    this.productos = [];
   }
 
   _filtered() {

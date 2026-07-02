@@ -29,7 +29,7 @@ App.InventoryModal = class InventoryModal {
             + '<div style="margin-bottom:1rem;padding:0.75rem;background:#f8fafc;border-radius:0.5rem;">'
               + '<div style="font-size:0.75rem;color:#64748b;">Producto</div>'
               + '<div style="font-weight:700;font-size:0.9rem;">' + App.escapeHtml(p ? (p.codigo + ' - ' + p.descripcion) : '') + '</div>'
-              + '<div style="font-size:0.75rem;color:#64748b;margin-top:0.25rem;">Stock actual: <strong>' + App.fmtMoney(p ? p.stock : 0) + '</strong></div>'
+              + '<div style="font-size:0.75rem;color:#64748b;margin-top:0.25rem;">Stock actual: <strong>' + App.fmtNumber(p ? p.stock : 0) + '</strong></div>'
             + '</div>'
             + '<div class="form-group">'
               + '<label class="form-label">Cantidad</label>'

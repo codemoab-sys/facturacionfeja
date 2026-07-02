@@ -43,9 +43,21 @@ App.NewDispatchGuide = class NewDispatchGuide {
 
   _bind() {
     var self = this;
-    ['#f-serie', '#f-fecha', '#f-obs', '#f-partida-ubigeo', '#f-partida-dir', '#f-llegada-ubigeo', '#f-llegada-dir', '#f-placa', '#f-conductor-doc', '#f-conductor-nombre'].forEach(function (sel) {
+    var fieldMap = {
+      '#f-serie': 'serie',
+      '#f-fecha': 'fecha_emision',
+      '#f-obs': 'observacion',
+      '#f-partida-ubigeo': 'partida_ubigeo',
+      '#f-partida-dir': 'partida_direccion',
+      '#f-llegada-ubigeo': 'llegada_ubigeo',
+      '#f-llegada-dir': 'llegada_direccion',
+      '#f-placa': 'vehiculo_placa',
+      '#f-conductor-doc': 'conductor_num_doc',
+      '#f-conductor-nombre': 'conductor_nombre',
+    };
+    Object.keys(fieldMap).forEach(function (sel) {
       var el = self.container.querySelector(sel);
-      if (el) el.addEventListener('input', function (e) { var key = sel.replace('#f-', '').replace('-', '_'); self.form[key] = e.target.value; });
+      if (el) el.addEventListener('input', function (e) { self.form[fieldMap[sel]] = e.target.value; });
     });
     this.container.querySelector('#f-motivo').addEventListener('change', function (e) { self.form.cod_traslado = e.target.value; });
     this.container.querySelector('#f-modalidad').addEventListener('change', function (e) { self.form.mod_traslado = e.target.value; });

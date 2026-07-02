@@ -5,6 +5,7 @@ App.Inventario = class Inventario {
     this.productos = [];
     this.movimientos = [];
     this.filtros = { tipo: '', desde: '', hasta: '' };
+    this.searchTerm = '';
     this.root = null;
   }
 
@@ -17,9 +18,10 @@ App.Inventario = class Inventario {
     App.refreshIcons();
   }
 
-  async _load() {
+  async _load(search) {
+    if (search !== undefined) this.searchTerm = search;
     try {
-      var res = await App.api.inventarioProductos();
+      var res = await App.api.inventarioProductos(this.searchTerm);
       this.productos = res.data || [];
     } catch (e) { this.productos = []; }
 
@@ -42,8 +44,8 @@ App.Inventario = class Inventario {
           + '<td class="td">' + App.escapeHtml(p.codigo) + '</td>'
           + '<td class="td">' + App.escapeHtml(p.descripcion) + '</td>'
           + '<td class="td">' + App.escapeHtml(p.categoria || '-') + '</td>'
-          + '<td class="td" style="text-align:right;font-weight:700;' + (alerta ? 'color:#dc2626;' : '') + '">' + App.fmtMoney(stock) + '</td>'
-          + '<td class="td" style="text-align:right;">' + App.fmtMoney(min) + '</td>'
+          + '<td class="td" style="text-align:right;font-weight:700;' + (alerta ? 'color:#dc2626;' : '') + '">' + App.fmtNumber(stock) + '</td>'
+          + '<td class="td" style="text-align:right;">' + App.fmtNumber(min) + '</td>'
           + '<td class="td" style="text-align:right;">' + App.fmtMoney(valor) + '</td>'
           + '<td class="td" style="text-align:right;white-space:nowrap;">'
             + '<button class="btn-inv-mov btn-sm" data-id="' + p.id + '" data-tipo="entrada" title="Entrada"><i data-lucide="plus-circle" class="w-4 h-4" style="color:#059669;"></i></button>'
@@ -61,8 +63,8 @@ App.Inventario = class Inventario {
           + '<td class="td">' + App.escapeHtml(m.codigo) + '</td>'
           + '<td class="td">' + App.escapeHtml(m.producto) + '</td>'
           + '<td class="td"><span style="display:inline-block;padding:0.125rem 0.5rem;border-radius:999px;font-size:0.7rem;font-weight:600;background:' + color + ';color:white;">' + App.escapeHtml(m.tipo) + '</span></td>'
-          + '<td class="td" style="text-align:right;">' + App.fmtMoney(m.cantidad) + '</td>'
-          + '<td class="td" style="text-align:right;">' + App.fmtMoney(m.stock_anterior) + ' &rarr; ' + App.fmtMoney(m.stock_nuevo) + '</td>'
+          + '<td class="td" style="text-align:right;">' + App.fmtNumber(m.cantidad) + '</td>'
+          + '<td class="td" style="text-align:right;">' + App.fmtNumber(m.stock_anterior) + ' &rarr; ' + App.fmtNumber(m.stock_nuevo) + '</td>'
           + '<td class="td" style="font-size:0.75rem;color:#64748b;">' + App.escapeHtml(m.motivo || '-') + '</td>'
         + '</tr>';
     }).join('') || '<tr><td colspan="7" style="text-align:center;padding:2rem;color:#94a3b8;">Sin movimientos</td></tr>';
@@ -147,7 +149,7 @@ App.Inventario = class Inventario {
       search.addEventListener('input', function () {
         clearTimeout(self._searchTimer);
         self._searchTimer = setTimeout(function () {
-          self._load().then(function () { self._renderHTML(); self._bind(); App.refreshIcons(); });
+          self._load(search.value).then(function () { self._renderHTML(); self._bind(); App.refreshIcons(); });
         }, 300);
       });
     }

@@ -33,7 +33,7 @@ class Producto extends Modelo
 
         $sql .= " ORDER BY p.codigo ASC";
 
-        return $this->query($sql, $params);
+        return $this->raw($sql, $params);
     }
 
     public function crear(array $data): int
