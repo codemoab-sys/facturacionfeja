@@ -34,7 +34,7 @@ var App = window.App || (window.App = {});
       this.onNavigate = opts.onNavigate;
       this.onClose = opts.onClose;
       this.onLogout = opts.onLogout;
-      this.session = opts.session || { nombre: 'Usuario', usuario: 'demo' };
+      this.session = opts.session || { nombre: 'Usuario', usuario: '' };
       this.root = null;
     }
 

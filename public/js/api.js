@@ -132,31 +132,10 @@ var App = window.App || (window.App = {});
       return request('GET', '/inventario/movimientos' + (q.length ? '?' + q.join('&') : ''));
     },
     inventarioRegistrarMovimiento: function (data) { return request('POST', '/inventario/movimiento', data); },
-    inventarioProductoDetalle: function (id) { return request('GET', '/inventario/productos/' + id); },
-    inventarioStockBajo: function () { return request('GET', '/inventario/stock-bajo'); },
-
     // ── Compras ──
     listarCompras: function (buscar) { return request('GET', '/compras' + (buscar ? '?buscar=' + encodeURIComponent(buscar) : '')); },
-    obtenerCompra: function (id) { return request('GET', '/compras/' + id); },
     crearCompra: function (data) { return request('POST', '/compras', data); },
     eliminarCompra: function (id) { return request('DELETE', '/compras/' + id); },
-
-    // ── Aliases para compatibilidad ──
-    getEmpresa: function () { return request('GET', '/empresa'); },
-    listSucursales: function () { return request('GET', '/sucursales'); },
-    listSeries: function (params) { return request('GET', '/series' + (params || '')); },
-    listClientes: function (buscar) { return request('GET', '/clientes?buscar=' + encodeURIComponent(buscar || '')); },
-    configGuardar: function (data) { return request('POST', '/config', data); },
-    configObtener: function () { return request('GET', '/config'); },
-    login: function (usuario, password) {
-      return fetch(BASE_PATH + '/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'usuario=' + encodeURIComponent(usuario) + '&password=' + encodeURIComponent(password),
-      }).then(function (r) { return r.json(); });
-    },
-    logout: function () { window.location.href = (typeof BASE_PATH !== 'undefined' ? BASE_PATH : '') + '/logout'; },
-    testConexion: function (data) { return request('POST', '/test-conexion', data); },
     // ── Productos ──
     listarProductos: function (buscar) { return request('GET', '/productos' + (buscar ? '?buscar=' + encodeURIComponent(buscar) : '')); },
     obtenerProducto: function (id) { return request('GET', '/productos/' + id); },

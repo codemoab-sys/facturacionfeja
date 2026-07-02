@@ -122,8 +122,4 @@ class ServicioProducto
         return ['success' => true, 'message' => 'Categoría creada', 'id' => $id];
     }
 
-    public function conStockBajo(int $userId, ?int $limite = null): array
-    {
-        return $this->repo->conStockBajo($userId, $limite);
-    }
 }

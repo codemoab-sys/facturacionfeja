@@ -89,8 +89,6 @@ $router->delete('/api/clientes-local/{id}', function ($p) { auth(); ctrl(\App\Ap
 $router->get('/api/inventario/productos', function () { auth(); ctrl(\App\Api\Controladores\InventarioApiControlador::class)->listarProductos(); });
 $router->get('/api/inventario/movimientos', function () { auth(); ctrl(\App\Api\Controladores\InventarioApiControlador::class)->listarMovimientos(); });
 $router->post('/api/inventario/movimiento', function () { auth(); ctrl(\App\Api\Controladores\InventarioApiControlador::class)->registrarMovimiento(); });
-$router->get('/api/inventario/productos/{id}', function ($p) { auth(); ctrl(\App\Api\Controladores\InventarioApiControlador::class)->obtenerProducto($p); });
-$router->get('/api/inventario/stock-bajo', function () { auth(); ctrl(\App\Api\Controladores\InventarioApiControlador::class)->stockBajo(); });
 
 // ── API Compras ──
 $router->get('/api/compras', function () { auth(); ctrl(\App\Api\Controladores\CompraApiControlador::class)->listar(); });

@@ -9,7 +9,7 @@ App.ClientPicker = class ClientPicker {
     this.apiResult = null;
     this.error = null;
     this.overlay = null;
-    this.clientes = App.CLIENTES_DEMO || [];
+    this.clientes = [];
   }
 
   _filtered() {

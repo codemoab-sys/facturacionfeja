@@ -34,17 +34,6 @@ class RepositorioProducto extends RepositorioBase
         return $rows[0] ?? null;
     }
 
-    public function conStockBajo(int $userId, ?int $limite = null): array
-    {
-        $sql = "SELECT * FROM productos WHERE user_id = ? AND stock <= stock_minimo AND stock_minimo > 0";
-        $params = [$userId];
-        if ($limite) {
-            $sql .= " LIMIT ?";
-            $params[] = $limite;
-        }
-        return $this->query($sql, $params);
-    }
-
     public function actualizarStock(int $id, float $nuevoStock): void
     {
         $this->execute(

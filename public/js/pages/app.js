@@ -32,8 +32,8 @@ var App = window.App || (window.App = {});
   function getSession() {
     try {
       var el = document.getElementById('app-session-data');
-      return el ? JSON.parse(el.textContent || '{}') : { nombre: 'Usuario', usuario: 'demo' };
-    } catch (e) { return { nombre: 'Usuario', usuario: 'demo' }; }
+      return el ? JSON.parse(el.textContent || '{}') : { nombre: 'Usuario', usuario: '' };
+    } catch (e) { return { nombre: 'Usuario', usuario: '' }; }
   }
 
   function getPageClass(path) {

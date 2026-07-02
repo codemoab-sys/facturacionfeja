@@ -5,14 +5,6 @@ namespace App\Repositorios;
 
 class RepositorioMovimientoInventario extends RepositorioBase
 {
-    public function listarPorProducto(int $productoId, int $userId): array
-    {
-        return $this->query(
-            "SELECT * FROM inventario_movimientos WHERE producto_id = ? AND user_id = ? ORDER BY created_at DESC",
-            [$productoId, $userId]
-        );
-    }
-
     public function listar(int $userId, array $filtros = []): array
     {
         $sql = "SELECT m.*, p.codigo, p.descripcion AS producto
@@ -60,12 +52,4 @@ class RepositorioMovimientoInventario extends RepositorioBase
         ]);
     }
 
-    public function obtenerStock(int $productoId): ?array
-    {
-        $rows = $this->query(
-            "SELECT id, stock, stock_minimo, descripcion, codigo FROM productos WHERE id = ?",
-            [$productoId]
-        );
-        return $rows[0] ?? null;
-    }
 }

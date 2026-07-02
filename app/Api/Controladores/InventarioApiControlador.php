@@ -60,21 +60,4 @@ class InventarioApiControlador extends ApiControlador
         $this->json($result, $result['success'] ? 200 : 400);
     }
 
-    public function obtenerProducto(array $params): void
-    {
-        $id = (int)($params['id'] ?? 0);
-        if (!$id) {
-            $this->error('ID requerido');
-            return;
-        }
-
-        $result = $this->servicio->obtenerMovimientosProducto($id, $this->userId());
-        $this->json($result, $result['success'] ? 200 : 400);
-    }
-
-    public function stockBajo(): void
-    {
-        $items = $this->servicioProducto->conStockBajo($this->userId());
-        $this->success($items);
-    }
 }

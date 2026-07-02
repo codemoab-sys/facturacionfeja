@@ -75,19 +75,4 @@ class ServicioInventario
         ];
     }
 
-    public function obtenerMovimientosProducto(int $productoId, int $userId): array
-    {
-        $producto = $this->repoProducto->find('productos', $productoId);
-        if (!$producto || $producto['user_id'] != $userId) {
-            return ['success' => false, 'message' => 'Producto no encontrado'];
-        }
-
-        $movimientos = $this->repoMovimiento->listarPorProducto($productoId, $userId);
-
-        return [
-            'success'     => true,
-            'producto'    => $producto,
-            'movimientos' => $movimientos,
-        ];
-    }
 }
