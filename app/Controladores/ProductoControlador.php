@@ -137,19 +137,6 @@ class ProductoControlador extends Controlador
         $this->json(['success' => true, 'message' => 'Producto eliminado']);
     }
 
-    public function listarDemo(array $params = []): void
-    {
-        $userId = Sesion::get('user_id');
-        if (!$userId) {
-            $this->json(['success' => true, 'data' => []]);
-            return;
-        }
-
-        $modelo = new Producto();
-        $items = $modelo->listarPorUsuario($userId);
-        $this->json(['success' => true, 'data' => $items]);
-    }
-
     public function listarCategorias(array $params = []): void
     {
         $modelo = new Categoria();

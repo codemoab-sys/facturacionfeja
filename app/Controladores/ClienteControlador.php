@@ -117,18 +117,6 @@ class ClienteControlador extends Controlador
         $this->json(['success' => true, 'message' => 'Cliente eliminado']);
     }
 
-    public function listarDemo(array $params = []): void
-    {
-        $userId = Sesion::get('user_id');
-        if (!$userId) {
-            $this->json(['success' => true, 'data' => []]);
-            return;
-        }
-        $modelo = new Cliente();
-        $items = $modelo->listarPorUsuario($userId);
-        $this->json(['success' => true, 'data' => $items]);
-    }
-
     public function buscarDocumento(array $params = []): void
     {
         $api = new \App\Servicios\ServicioApiSunat();

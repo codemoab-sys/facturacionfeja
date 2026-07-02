@@ -155,7 +155,6 @@ var App = window.App || (window.App = {});
     obtenerCliente: function (id) { return request('GET', '/clientes-local/' + id); },
     guardarCliente: function (data, id) { return request('POST', id ? '/clientes-local/' + id : '/clientes-local', data); },
     eliminarCliente: function (id) { return request('DELETE', '/clientes-local/' + id); },
-    productosDemo: function () { return request('GET', '/productos-demo'); },
-    clientesDemo: function () { return request('GET', '/clientes-demo'); },
+
   };
 })();

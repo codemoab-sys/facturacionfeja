@@ -132,10 +132,6 @@ $router->post('/api/clientes-local', function () { auth(); ctrl(\App\Controlador
 $router->post('/api/clientes-local/{id}', function ($p) { auth(); ctrl(\App\Controladores\ClienteControlador::class)->guardar([$p]); });
 $router->delete('/api/clientes-local/{id}', function ($p) { auth(); ctrl(\App\Controladores\ClienteControlador::class)->eliminar([$p]); });
 
-// ── Alias compatibilidad ──
-$router->get('/api/productos-demo', function () { auth(); ctrl(\App\Controladores\ProductoControlador::class)->listarDemo(); });
-$router->get('/api/clientes-demo', function () { auth(); ctrl(\App\Controladores\ClienteControlador::class)->listarDemo(); });
-
 // ── Pages (render HTML) ──
 $router->get('/', function () { auth(); ctrl(\App\Controladores\PanelControlador::class)->index(); });
 $router->get('/nueva-factura', function () { auth(); ctrl(\App\Controladores\FacturaControlador::class)->create(); });
