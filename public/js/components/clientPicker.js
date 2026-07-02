@@ -100,18 +100,10 @@ App.ClientPicker = class ClientPicker {
   render(container) {
     var self = this;
     App.api.listarClientesLocal().then(function (res) {
-      if (res.success && res.data && res.data.length > 0) {
+      if (res.success && res.data) {
         self.clientes = res.data;
-      } else {
-        return App.api.clientesDemo().then(function (res2) {
-          if (res2.success && res2.data) {
-            self.clientes = res2.data;
-          }
-        });
       }
-    }).catch(function () {
-      self.clientes = App.CLIENTES_DEMO || [];
-    }).finally(function () {
+    }).catch(function () {}).finally(function () {
       self._doRender(container);
     });
   }

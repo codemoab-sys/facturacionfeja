@@ -66,18 +66,10 @@ App.ProductPicker = class ProductPicker {
   render(container) {
     var self = this;
     App.api.listarProductos().then(function (res) {
-      if (res.success && res.data && res.data.length > 0) {
+      if (res.success && res.data) {
         self.productos = res.data;
-      } else {
-        return App.api.productosDemo().then(function (res2) {
-          if (res2.success && res2.data) {
-            self.productos = res2.data;
-          }
-        });
       }
-    }).catch(function () {
-      self.productos = App.PRODUCTOS_DEMO || [];
-    }).finally(function () {
+    }).catch(function () {}).finally(function () {
       self._doRender(container);
     });
   }

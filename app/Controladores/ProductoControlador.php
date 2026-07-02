@@ -141,20 +141,12 @@ class ProductoControlador extends Controlador
     {
         $userId = Sesion::get('user_id');
         if (!$userId) {
-            // Fallback a demo data si no hay sesión
-            $this->json(['success' => true, 'data' => $this->demoData()]);
+            $this->json(['success' => true, 'data' => []]);
             return;
         }
 
         $modelo = new Producto();
         $items = $modelo->listarPorUsuario($userId);
-
-        if (empty($items)) {
-            // Si no hay productos, devolver demo data
-            $this->json(['success' => true, 'data' => $this->demoData()]);
-            return;
-        }
-
         $this->json(['success' => true, 'data' => $items]);
     }
 
@@ -163,17 +155,5 @@ class ProductoControlador extends Controlador
         $modelo = new Categoria();
         $items = $modelo->listarTodas();
         $this->json(['success' => true, 'data' => $items]);
-    }
-
-    private function demoData(): array
-    {
-        return [
-            ['codigo' => 'P001', 'cod_producto_sunat' => '43211503', 'descripcion' => 'LAPTOP HP PAVILION 15 i7 16GB 512GB SSD', 'unidad' => 'NIU', 'precio_unitario' => 2950.00, 'tip_afe_igv' => '10', 'categoria' => 'Tecnología'],
-            ['codigo' => 'P002', 'cod_producto_sunat' => '43211708', 'descripcion' => 'MOUSE LOGITECH M170 INALAMBRICO', 'unidad' => 'NIU', 'precio_unitario' => 59.00, 'tip_afe_igv' => '10', 'categoria' => 'Tecnología'],
-            ['codigo' => 'P003', 'cod_producto_sunat' => '43211706', 'descripcion' => 'TECLADO MECANICO REDRAGON K552 RGB', 'unidad' => 'NIU', 'precio_unitario' => 189.00, 'tip_afe_igv' => '10', 'categoria' => 'Tecnología'],
-            ['codigo' => 'S001', 'cod_producto_sunat' => '81111501', 'descripcion' => 'SERVICIO DE CONSULTORIA EN TI (HORA)', 'unidad' => 'HUR', 'precio_unitario' => 150.00, 'tip_afe_igv' => '10', 'categoria' => 'Servicios'],
-            ['codigo' => 'P005', 'cod_producto_sunat' => '55101500', 'descripcion' => 'LIBRO "CLEAN CODE" — ROBERT MARTIN', 'unidad' => 'NIU', 'precio_unitario' => 89.00, 'tip_afe_igv' => '20', 'categoria' => 'Libros (exonerado)'],
-            ['codigo' => 'P006', 'cod_producto_sunat' => '24112003', 'descripcion' => 'BOLSA PLASTICA BIODEGRADABLE', 'unidad' => 'BG', 'precio_unitario' => 0.50, 'tip_afe_igv' => '10', 'categoria' => 'Empaque', 'icbper' => 0.50, 'factor_icbper' => 0.50],
-        ];
     }
 }

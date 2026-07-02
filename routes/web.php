@@ -132,7 +132,7 @@ $router->post('/api/clientes-local', function () { auth(); ctrl(\App\Controlador
 $router->post('/api/clientes-local/{id}', function ($p) { auth(); ctrl(\App\Controladores\ClienteControlador::class)->guardar([$p]); });
 $router->delete('/api/clientes-local/{id}', function ($p) { auth(); ctrl(\App\Controladores\ClienteControlador::class)->eliminar([$p]); });
 
-// ── Demo data endpoints ──
+// ── Alias compatibilidad ──
 $router->get('/api/productos-demo', function () { auth(); ctrl(\App\Controladores\ProductoControlador::class)->listarDemo(); });
 $router->get('/api/clientes-demo', function () { auth(); ctrl(\App\Controladores\ClienteControlador::class)->listarDemo(); });
 
