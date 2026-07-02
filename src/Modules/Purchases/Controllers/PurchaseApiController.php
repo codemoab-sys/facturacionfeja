@@ -4,16 +4,23 @@ declare(strict_types=1);
 namespace App\Modules\Purchases\Controllers;
 
 use App\Framework\ApiController;
+use App\Modules\Purchases\Services\PurchaseService;
 
 class PurchaseApiController extends ApiController
 {
+    private PurchaseService $servicio;
+
+    public function __construct(?PurchaseService $servicio = null)
+    {
+        parent::__construct();
+        $this->servicio = $servicio ?? new PurchaseService();
+    }
+
     public function listar(): void
     {
         $this->requireAuth();
         $buscar = $this->param('buscar', '');
-        $servicio = new \App\Servicios\ServicioCompra();
-        $items = $servicio->listar($this->userId, $buscar);
-        $this->success($items);
+        $this->success($this->servicio->listar($this->userId, $buscar));
     }
 
     public function obtener(array $params): void
@@ -21,8 +28,7 @@ class PurchaseApiController extends ApiController
         $this->requireAuth();
         $id = (int)($params['id'] ?? 0);
         if (!$id) $this->error('ID requerido');
-        $servicio = new \App\Servicios\ServicioCompra();
-        $item = $servicio->obtener($id, $this->userId);
+        $item = $this->servicio->obtener($id, $this->userId);
         if (!$item) $this->error('Compra no encontrada', 404);
         $this->success($item);
     }
@@ -41,8 +47,7 @@ class PurchaseApiController extends ApiController
             'total'            => (float)$this->input('total', 0),
             'detalles'         => $this->input('detalles', []),
         ];
-        $servicio = new \App\Servicios\ServicioCompra();
-        $result = $servicio->crear($this->userId, $data);
+        $result = $this->servicio->crear($this->userId, $data);
         $this->json($result, $result['success'] ? 200 : 400);
     }
 
@@ -51,8 +56,7 @@ class PurchaseApiController extends ApiController
         $this->requireAuth();
         $id = (int)($params['id'] ?? 0);
         if (!$id) $this->error('ID requerido');
-        $servicio = new \App\Servicios\ServicioCompra();
-        $result = $servicio->eliminar($id, $this->userId);
+        $result = $this->servicio->eliminar($id, $this->userId);
         $this->json($result, $result['success'] ? 200 : 400);
     }
 }

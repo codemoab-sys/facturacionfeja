@@ -4,16 +4,23 @@ declare(strict_types=1);
 namespace App\Modules\Inventory\Controllers;
 
 use App\Framework\ApiController;
+use App\Modules\Inventory\Services\InventoryService;
 
 class InventoryApiController extends ApiController
 {
+    private InventoryService $servicio;
+
+    public function __construct(?InventoryService $servicio = null)
+    {
+        parent::__construct();
+        $this->servicio = $servicio ?? new InventoryService();
+    }
+
     public function listarProductos(): void
     {
         $this->requireAuth();
         $buscar = $this->param('buscar', '');
-        $servicio = new \App\Servicios\ServicioInventario();
-        $items = $servicio->listarProductosConStock($this->userId, $buscar);
-        $this->success($items);
+        $this->success($this->servicio->listarProductosConStock($this->userId, $buscar));
     }
 
     public function listarMovimientos(): void
@@ -25,9 +32,7 @@ class InventoryApiController extends ApiController
             'desde'       => $this->param('desde', ''),
             'hasta'       => $this->param('hasta', ''),
         ];
-        $servicio = new \App\Servicios\ServicioInventario();
-        $items = $servicio->listarMovimientos($this->userId, $filtros);
-        $this->success($items);
+        $this->success($this->servicio->listarMovimientos($this->userId, $filtros));
     }
 
     public function registrarMovimiento(): void
@@ -38,12 +43,9 @@ class InventoryApiController extends ApiController
         $cantidad = (float)$this->input('cantidad', 0);
         $motivo = $this->input('motivo', '');
 
-        if (!$productoId) {
-            $this->error('Producto requerido');
-        }
+        if (!$productoId) $this->error('Producto requerido');
 
-        $servicio = new \App\Servicios\ServicioInventario();
-        $result = $servicio->registrarMovimiento($this->userId, $productoId, $tipo, $cantidad, $motivo);
+        $result = $this->servicio->registrarMovimiento($this->userId, $productoId, $tipo, $cantidad, $motivo);
         $this->json($result, $result['success'] ? 200 : 400);
     }
 }
