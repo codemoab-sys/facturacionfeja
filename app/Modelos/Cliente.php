@@ -11,7 +11,7 @@ class Cliente extends Modelo
 
     public function obtenerPorId(int $id): ?array
     {
-        return $this->find($id);
+        return $this->findById($id);
     }
 
     public function listarPorUsuario(int $userId, string $buscar = ''): array
@@ -32,7 +32,7 @@ class Cliente extends Modelo
 
     public function crear(array $data): int
     {
-        return $this->insert($data);
+        return $this->create($data);
     }
 
     public function actualizar(int $id, array $data): void
@@ -48,7 +48,7 @@ class Cliente extends Modelo
 
     public function buscarPorDoc(int $userId, string $numDoc): ?array
     {
-        $rows = $this->findBy(['user_id' => $userId, 'num_doc' => $numDoc]);
+        $rows = $this->raw("SELECT * FROM {$this->tabla} WHERE user_id = ? AND num_doc = ?", [$userId, $numDoc]);
         return $rows[0] ?? null;
     }
 }

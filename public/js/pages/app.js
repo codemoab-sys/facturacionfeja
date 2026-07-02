@@ -48,6 +48,8 @@ var App = window.App || (window.App = {});
       '/resumenes':            'Summaries',
       '/productos':            'Productos',
       '/clientes':             'Clientes',
+      '/inventario':           'Inventario',
+      '/compras':              'Compras',
     };
     if (routes[path]) return routes[path];
     if (path.startsWith('/documentos/')) return 'DocumentList';

@@ -7,7 +7,7 @@ use App\Nucleo\Modelo;
 
 class ConfiguracionUsuario extends Modelo
 {
-    protected string $table = 'user_configs';
+    protected string $tabla = 'user_configs';
 
     public function findByUserId(int $userId): ?array
     {

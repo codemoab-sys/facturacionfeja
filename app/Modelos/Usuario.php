@@ -7,5 +7,5 @@ use App\Nucleo\Modelo;
 
 class Usuario extends Modelo
 {
-    protected string $table = 'users';
+    protected string $tabla = 'users';
 }

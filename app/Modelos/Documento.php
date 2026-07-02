@@ -7,5 +7,5 @@ use App\Nucleo\Modelo;
 
 class Documento extends Modelo
 {
-    protected string $table = 'documents';
+    protected string $tabla = 'documents';
 }

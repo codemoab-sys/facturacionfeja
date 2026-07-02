@@ -23,7 +23,9 @@ class App
         $this->request = new Solicitud();
         $this->router = new Enrutador();
 
+        require_once __DIR__ . '/../../routes/helpers.php';
         require_once __DIR__ . '/../../routes/web.php';
+        require_once __DIR__ . '/../../routes/api.php';
 
         $this->router->dispatch($this->request);
     }

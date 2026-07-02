@@ -13,6 +13,16 @@ class PanelControlador extends Controlador
         $this->render('dashboard', ['pageTitle' => 'Inicio']);
     }
 
+    public function inventario(array $params = []): void
+    {
+        $this->render('inventario/index', ['pageTitle' => 'Inventario']);
+    }
+
+    public function compras(array $params = []): void
+    {
+        $this->render('compras/index', ['pageTitle' => 'Compras']);
+    }
+
     public function procesar(string $method, array $ignored): void
     {
         $api = new ServicioApiSunat();

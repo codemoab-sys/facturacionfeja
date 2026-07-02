@@ -11,7 +11,7 @@ class Categoria extends Modelo
 
     public function obtenerPorId(int $id): ?array
     {
-        return $this->find($id);
+        return $this->findById($id);
     }
 
     public function listarTodas(): array
@@ -21,7 +21,7 @@ class Categoria extends Modelo
 
     public function crear(array $data): int
     {
-        return $this->insert($data);
+        return $this->create($data);
     }
 
     public function actualizar(int $id, array $data): void

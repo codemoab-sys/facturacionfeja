@@ -11,7 +11,7 @@ class Producto extends Modelo
 
     public function obtenerPorId(int $id): ?array
     {
-        return $this->find($id);
+        return $this->findById($id);
     }
 
     public function listarPorUsuario(int $userId, string $buscar = ''): array
@@ -38,7 +38,7 @@ class Producto extends Modelo
 
     public function crear(array $data): int
     {
-        return $this->insert($data);
+        return $this->create($data);
     }
 
     public function actualizar(int $id, array $data): void
@@ -54,7 +54,7 @@ class Producto extends Modelo
 
     public function buscarPorCodigo(int $userId, string $codigo): ?array
     {
-        $rows = $this->findBy(['user_id' => $userId, 'codigo' => $codigo]);
+        $rows = $this->raw("SELECT * FROM {$this->tabla} WHERE user_id = ? AND codigo = ?", [$userId, $codigo]);
         return $rows[0] ?? null;
     }
 }

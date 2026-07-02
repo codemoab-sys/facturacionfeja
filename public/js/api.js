@@ -126,7 +126,25 @@ var App = window.App || (window.App = {});
 
     // ── Demo ──
     listarProductosDemo: function () { return request('GET', '/productos-demo'); },
+    listarProductosDemo: function () { return request('GET', '/productos-demo'); },
     listarClientesDemo: function () { return request('GET', '/clientes-demo'); },
+
+    // ── Inventario ──
+    inventarioProductos: function (buscar) { return request('GET', '/inventario/productos' + (buscar ? '?buscar=' + encodeURIComponent(buscar) : '')); },
+    inventarioMovimientos: function (filtros) {
+      var q = [];
+      if (filtros) { for (var k in filtros) { if (filtros[k]) q.push(k + '=' + encodeURIComponent(filtros[k])); } }
+      return request('GET', '/inventario/movimientos' + (q.length ? '?' + q.join('&') : ''));
+    },
+    inventarioRegistrarMovimiento: function (data) { return request('POST', '/inventario/movimiento', data); },
+    inventarioProductoDetalle: function (id) { return request('GET', '/inventario/productos/' + id); },
+    inventarioStockBajo: function () { return request('GET', '/inventario/stock-bajo'); },
+
+    // ── Compras ──
+    listarCompras: function (buscar) { return request('GET', '/compras' + (buscar ? '?buscar=' + encodeURIComponent(buscar) : '')); },
+    obtenerCompra: function (id) { return request('GET', '/compras/' + id); },
+    crearCompra: function (data) { return request('POST', '/compras', data); },
+    eliminarCompra: function (id) { return request('DELETE', '/compras/' + id); },
 
     // ── Aliases para compatibilidad ──
     getEmpresa: function () { return request('GET', '/empresa'); },

@@ -83,6 +83,7 @@ if (!$hasApiConfig):
   <script src="<?= asset('js/components/productPicker.js') ?>"></script>
   <script src="<?= asset('js/components/clientPicker.js') ?>"></script>
   <script src="<?= asset('js/components/responseModal.js') ?>"></script>
+  <script src="<?= asset('js/components/inventoryModal.js') ?>"></script>
   <script src="<?= asset('js/pages/login.js') ?>"></script>
   <script src="<?= asset('js/pages/settings.js') ?>"></script>
   <script src="<?= asset('js/pages/dashboard.js') ?>"></script>
@@ -95,6 +96,8 @@ if (!$hasApiConfig):
   <script src="<?= asset('js/pages/productos.js') ?>"></script>
   <script src="<?= asset('js/pages/clientes.js') ?>"></script>
   <script src="<?= asset('js/pages/summaries.js') ?>"></script>
+  <script src="<?= asset('js/pages/inventario.js') ?>"></script>
+  <script src="<?= asset('js/pages/compra.js') ?>"></script>
   <script src="<?= asset('js/pages/app.js') ?>"></script>
 </body>
 </html>

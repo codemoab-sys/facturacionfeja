@@ -95,6 +95,15 @@ App.urlBase = function () {
   return idx > 0 ? path.substring(0, idx) : '';
 };
 
+App.showToast = function (message, type) {
+  type = type || 'info';
+  if (typeof Swal !== 'undefined') {
+    Swal.fire({ icon: type, title: message, timer: 2000, showConfirmButton: false, toast: true, position: 'top-end' });
+  } else {
+    alert(message);
+  }
+};
+
 App.refreshIcons = function () {
   if (window.lucide && window.lucide.createIcons) {
     window.lucide.createIcons({ nameAttr: 'data-lucide' });
