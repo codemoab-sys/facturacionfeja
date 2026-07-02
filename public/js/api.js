@@ -147,7 +147,7 @@ var App = window.App || (window.App = {});
     // ── Productos ──
     listarProductos: function (buscar) { return request('GET', '/productos' + (buscar ? '?buscar=' + encodeURIComponent(buscar) : '')); },
     obtenerProducto: function (id) { return request('GET', '/productos/' + id); },
-    guardarProducto: function (data, id) { return id ? request('PUT', '/productos/' + id, data) : request('POST', '/productos', data); },
+    guardarProducto: function (data, id) { return request('POST', id ? '/productos/' + id : '/productos', data); },
     eliminarProducto: function (id) { return request('DELETE', '/productos/' + id); },
     listarCategorias: function () { return request('GET', '/categorias'); },
     productosDemo: function () { return request('GET', '/productos-demo'); },

@@ -121,7 +121,7 @@ $router->get('/api/panel/por-moneda', function () { auth(); ctrl(\App\Controlado
 $router->get('/api/productos', function () { auth(); ctrl(\App\Controladores\ProductoControlador::class)->listar(); });
 $router->get('/api/productos/{id}', function ($p) { auth(); ctrl(\App\Controladores\ProductoControlador::class)->obtener([$p]); });
 $router->post('/api/productos', function () { auth(); ctrl(\App\Controladores\ProductoControlador::class)->guardar(); });
-$router->put('/api/productos/{id}', function ($p) { auth(); ctrl(\App\Controladores\ProductoControlador::class)->guardar([$p]); });
+$router->post('/api/productos/{id}', function ($p) { auth(); ctrl(\App\Controladores\ProductoControlador::class)->guardar([$p]); });
 $router->delete('/api/productos/{id}', function ($p) { auth(); ctrl(\App\Controladores\ProductoControlador::class)->eliminar([$p]); });
 $router->get('/api/categorias', function () { auth(); ctrl(\App\Controladores\ProductoControlador::class)->listarCategorias(); });
 
