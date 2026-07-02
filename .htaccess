@@ -4,6 +4,14 @@ RewriteEngine On
 # RewriteCond %{HTTPS} off
 # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+# Block access to sensitive directories
+RewriteRule ^migrations/ - [F,L]
+RewriteRule ^config/ - [F,L]
+RewriteRule ^storage/ - [F,L]
+RewriteRule ^app/ - [F,L]
+RewriteRule ^src/ - [F,L]
+RewriteRule ^\.git/ - [F,L]
+
 # Redirect everything to index.php (front controller)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
