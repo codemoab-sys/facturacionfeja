@@ -58,6 +58,11 @@ class Controlador
         exit;
     }
 
+    protected function getRequest(): Solicitud
+    {
+        return $this->request;
+    }
+
     protected function isPost(): bool
     {
         return $_SERVER['REQUEST_METHOD'] === 'POST';
