@@ -1,9 +1,18 @@
 <?php
-require_once __DIR__ . '/config/app.php';
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+
+// Solo definimos BASE_PATH si no est� definido
+if (!defined('BASE_PATH')) {
+    $scriptDir = dirname($_SERVER['SCRIPT_NAME']);
+    define('BASE_PATH', ($scriptDir === '/' || $scriptDir === '\\') ? '' : rtrim($scriptDir, '/'));
+}
+
 require_once __DIR__ . '/app/Helpers.php';
 
 $configFile = __DIR__ . '/config/database.php';
 if (!file_exists($configFile)) {
+    echo "<p style='color:orange'>No se encontr� config/database.php, usando database.example.php</p>";
     $configFile = __DIR__ . '/config/database.example.php';
 }
 $config = require $configFile;
